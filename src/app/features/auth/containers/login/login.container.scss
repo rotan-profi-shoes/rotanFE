@@ -1,0 +1,15 @@
+.login-container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    filter: blur(0px);
+    background-image: url('../../../../../assets/images/background.jpg');
+}
+
+.login {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+}
