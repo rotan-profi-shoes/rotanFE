@@ -1,19 +1,19 @@
 <div class="main-container">
   <div class="main-container__logo">
 
-    <img class="logo" src="../../../../../assets/images/logo.jpg">
+    <img class="logo" src="../../../../../assets/images/rotan_logo.png">
   </div>
   <form [formGroup]="loginForm" class="main-container__login-form">
-    <span class="title">SoMeHELP</span>
+    <span class="title">Rotan Profi Shoes GmbH</span>
     <hr class="line">
     <div class="input-field">
       <input formControlName="email" type="text" pInputText class="p-inputtext-sm" placeholder="Email">
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
         <div *ngIf="email.errors.required">
-          Email is required.
+          E-Mail ist erforderlich.
         </div>
         <div *ngIf="email.errors.email">
-          Is not valid email.
+          Ist keine gültige E-Mail.
         </div>
       </div>
     </div>
@@ -22,12 +22,12 @@
       <input formControlName="password" type="password" pInputText class="p-inputtext-sm" placeholder="Password">
       <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
         <div *ngIf="password.errors.required">
-          Password is required.
+          Passwort wird benötigt.
         </div>
       </div>
     </div>
 
-    <button pButton type="submit" label="Log In" class="p-button-sm p-button-secondary" (click)="tryLogin()"></button>
+    <button pButton type="submit" label="ANMELDEN" class="p-button-sm p-button-secondary" (click)="tryLogin()"></button>
   </form>
 </div>
 

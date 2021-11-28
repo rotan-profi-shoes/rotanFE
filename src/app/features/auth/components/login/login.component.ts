@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new SetUser(resp.user));
       this.store.dispatch(new SetToken(resp.userToken));
 
-      this.messageService.add({severity:'success', summary:'Success', detail:'Your credentials are valid.'});
+      this.messageService.add({severity:'success', summary:'Erfolg', detail:'Ihre Zugangsdaten sind gültig.'});
       this.router.navigate(['admin']);
     },
     (mainError) => {

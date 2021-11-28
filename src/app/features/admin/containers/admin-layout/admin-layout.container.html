@@ -1,11 +1,15 @@
 <div class="nav-panel">
-  <img class="nav-panel__logo" src="../../../../../assets/images/inst_logo.png">
-  <div class="nav-panel__actions">
-    <button pButton pRipple type="button" icon="fas fa-cog" class="p-button-rounded p-button-secondary action-button">
+  <img class="nav-panel__logo" src="../../../../../assets/images/rotan_logo-white.png" [routerLink]="['admin']">
+  <div class=" nav-panel__actions">
+    <button pButton pRipple type="button" label="hinzufügen" icon="fas fa-plus" [routerLink]="['add-shoes']"
+      class="p-button-rounded p-button-warning action-button">
+    </button>
+
+    <button pButton pRipple type="button" icon="fas fa-cog" class="p-button-rounded p-button-warning action-button">
     </button>
 
     <button pButton pRipple type="button" icon="fas fa-sign-out-alt" (click)="logOut()"
-      class="p-button-rounded p-button-secondary action-button">
+      class="p-button-rounded p-button-warning action-button">
     </button>
   </div>
 </div>
