@@ -6,6 +6,13 @@ import { ButtonModule } from 'primeng/button';
 import { AdminLayoutContainer } from './containers/admin-layout/admin-layout.container';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShoesFormComponent } from './components/shoes-form/shoes-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ShoesService } from './services/shoes.service';
+import { InputTextModule } from 'primeng/inputtext';
+import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -17,6 +24,20 @@ import { ShoesFormComponent } from './components/shoes-form/shoes-form.component
     AdminRoutingModule,
     ButtonModule,
     FontAwesomeModule,
-  ]
+    FormsModule,
+    ReactiveFormsModule,
+    MultiSelectModule,
+    InputTextModule,
+    HttpClientModule,
+    DropdownModule,
+  ],
+  providers: [
+    ShoesService,
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptor, 
+      multi: true 
+    },
+  ],
 })
 export class AdminModule { }

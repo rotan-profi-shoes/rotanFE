@@ -1,1 +1,135 @@
-<p>shoes-form works!</p>
+<div class="add-shoes-form">
+  <span class="title">ADD NEW SHOES</span>
+
+  <form [formGroup]="shoesForm" class="shoes-form">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">SKU</span>
+
+            <input formControlName="sku" type="text" pInputText class="p-inputtext-sm">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">NAME</span>
+
+            <input formControlName="name" type="text" pInputText class="p-inputtext-sm">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">GENDER</span>
+
+            <p-dropdown formControlName="gender" [options]="genders" optionLabel="name" optionValue="id"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">FORM</span>
+
+            <p-dropdown formControlName="form" [options]="forms" optionLabel="name" optionValue="id"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">SHOES CLASS</span>
+
+            <p-dropdown formControlName="shoesClass" [options]="shoesClass" optionLabel="name" optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">PROTECTION CLASS</span>
+
+            <p-dropdown formControlName="protectionClass" [options]="protectionClass" optionLabel="name"
+              optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">COLOR</span>
+
+            <p-dropdown formControlName="color" [options]="colors" optionLabel="name" optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">SIZE</span>
+
+            <p-multiSelect formControlName="size" [options]="sizes"></p-multiSelect>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">PRICE</span>
+
+            <input formControlName="price" type="text" pInputText class="p-inputtext-sm">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">MODIFICATION</span>
+
+            <p-dropdown formControlName="modification" [options]="modifications" optionLabel="name" optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">MATERIAL</span>
+
+            <p-dropdown formControlName="material" [options]="materials" optionLabel="name" optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">SOLE</span>
+
+            <p-dropdown formControlName="sole" [options]="soles" optionLabel="name" optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="space">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <button pButton type="submit" label="CANCEL" class="p-button-sm p-button-secondary"
+              [routerLink]="['admin']"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <button pButton type="submit" label="ADD SHOES" class="p-button-sm p-button-warning"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

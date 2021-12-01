@@ -1,0 +1,37 @@
+.add-shoes-form {
+    background: #1283ad;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+.form-field {
+    margin: 0 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: 5px;
+    color: white;
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.title {
+    margin: 10px 0;
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+::ng-deep .p-multiselect {
+    width: 100%;
+}
+
+::ng-deep .p-dropdown {
+    width: 100%;
+}

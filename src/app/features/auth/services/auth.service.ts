@@ -13,6 +13,6 @@ export class AuthService {
   ) { }
 
   public authentificate(user: any): Observable<any> {
-    return this.http.post<Observable<any>>(`${environment.someHelpApiHost}/api/user/login`, user);
+    return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/user/login`, user);
   }
 }

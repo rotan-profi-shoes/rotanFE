@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  someHelpApiHost: 'http://localhost:3000',
+  rotanApiHost: 'http://localhost:3000',
 };
 
 /*
