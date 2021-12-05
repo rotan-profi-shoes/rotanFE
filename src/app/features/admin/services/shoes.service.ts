@@ -4,13 +4,21 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoesService {
 
   constructor(
     private readonly http: HttpClient,
-  ) { }
+  ) { } 
+
+  public getShoesList(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.rotanApiHost}/api/shoes`);
+  }
+
+  public addShoes(shoes: any): Observable<any> {
+    return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/shoes/add`, shoes);
+  }
 
   public getGenderTypesList(): Observable<any> {
     return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/gender-types`);

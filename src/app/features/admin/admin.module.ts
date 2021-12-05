@@ -13,11 +13,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
+import { ShoesTableComponent } from './components/shoes-table/shoes-table.component';
 
 @NgModule({
   declarations: [
     AdminLayoutContainer,
     ShoesFormComponent,
+    ShoesTableComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { DropdownModule } from 'primeng/dropdown';
     InputTextModule,
     HttpClientModule,
     DropdownModule,
+    TableModule,
   ],
   providers: [
     ShoesService,

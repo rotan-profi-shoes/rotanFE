@@ -1,0 +1,35 @@
+<p-table [value]="shoes" responsiveLayout="scroll">
+  <!-- <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      Shoes
+      <p-button icon="pi pi-refresh"></p-button>
+    </div>
+  </ng-template> -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th>SKU</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Class type</th>
+      <th>Sole type</th>
+      <th>Modification type</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-shoe>
+    <tr>
+      <td>{{ shoe.sku }}</td>
+      <td><img [src]="shoe.img1" width="100" class="p-shadow-4" /></td>
+      <td>{{ shoe.name }}</td>
+      <td>{{ shoe.price | currency:'USD' }}</td>
+      <td>{{ shoe.shoesClass.name }}</td>
+      <td>{{ shoe.sole.name }}</td>
+      <td>{{ shoe.modification.name }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are {{ shoes ? shoes.length : 0 }} shoes.
+    </div>
+  </ng-template>
+</p-table>

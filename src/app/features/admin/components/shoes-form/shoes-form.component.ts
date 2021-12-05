@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { ShoesService } from '../../services/shoes.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 interface Item {
   id: string,
@@ -14,8 +16,6 @@ interface Item {
   styleUrls: ['./shoes-form.component.scss']
 })
 export class ShoesFormComponent implements OnInit {
-  // public cities: string[];
-  // selectedCities: string[] = [];
   public shoesForm: FormGroup;
   public genders: Item[];
   public forms: Item[];
@@ -30,8 +30,9 @@ export class ShoesFormComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly shoesService: ShoesService,
+    private readonly messageService: MessageService,
+    private readonly router: Router,
   ) {
-    // this.cities = ['40', '41', '42', '43', '44', '45'];
    }
 
   public ngOnInit(): void {
@@ -63,6 +64,16 @@ export class ShoesFormComponent implements OnInit {
     });
   }
 
+  public submit(): void {
+     this.shoesService.addShoes(this.shoesForm.value).subscribe((resp) => {
+      this.messageService.add({severity:'success', summary:'Success', detail:'Shoes added with success!'});
+      this.router.navigate(['admin']);
+     },
+     (mainError) => {
+       this.messageService.add({severity:'error', summary:'Error', detail: mainError.error});
+     })
+  }
+
   private initForm(): void {
     this.shoesForm = this.formBuilder.group({
         sku: [null],
@@ -77,6 +88,8 @@ export class ShoesFormComponent implements OnInit {
         modification: [null],
         material: [null],
         sole: [null],
+        img1: [null],
+        img2: [null],
     });
   }
 }
