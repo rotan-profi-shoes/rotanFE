@@ -20,12 +20,16 @@ export class ShoesFormComponent implements OnInit {
   public genders: Item[];
   public forms: Item[];
   public shoesClass: Item[];
-  public protectionClass: Item[];
+  public zertifikats: Item[];
   public colors: Item[];
   public sizes: String[];
   public modifications: Item[];
   public materials: Item[];
   public soles: Item[];
+  public upperLeathers: Item[];
+  public descriptions: Item[];
+  public capDescriptions: Item[];
+  public soleDescriptions: Item[];
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -47,20 +51,28 @@ export class ShoesFormComponent implements OnInit {
       this.shoesService.getGenderTypesList(),
       this.shoesService.getSizesTypesList(),
       this.shoesService.getShoesClassTypesList(),
-      this.shoesService.getProtectionTypesList(),
+      this.shoesService.getZertifikatTypesList(),
       this.shoesService.getSoleTypesList(),
       this.shoesService.getMaterialTypesList(),
       this.shoesService.getModificationTypesList(),
-    ]).subscribe(([ colors, forms, genders, sizes, shoesClass, protectionClass, soles, materials, modification ]) => {
+      this.shoesService.getUpperLeatherTypesList(),
+      this.shoesService.getDescriptionTypesList(),
+      this.shoesService.getCapDescriptionTypesList(),
+      this.shoesService.getSoleDescriptionTypesList(),
+    ]).subscribe(([ colors, forms, genders, sizes, shoesClass, zertifikats, soles, materials, modifications, upperLeathers, descriptions, capDescriptions, soleDescriptions ]) => {
       this.colors = colors;
       this.forms = forms;
       this.genders = genders;
       this.sizes = sizes;
       this.shoesClass = shoesClass;
-      this.protectionClass = protectionClass;
+      this.zertifikats = zertifikats;
       this.soles = soles;
       this.materials = materials;
-      this.modifications = modification;
+      this.modifications = modifications;
+      this.upperLeathers = upperLeathers;
+      this.descriptions = descriptions;
+      this.capDescriptions = capDescriptions;
+      this.soleDescriptions = soleDescriptions;
     });
   }
 
@@ -81,13 +93,17 @@ export class ShoesFormComponent implements OnInit {
         gender: [null],
         form: [null],
         shoesClass: [null],
-        protectionClass: [null],
+        zertifikat: [null],
         color: [null],
         size: [null],
         price: [null],
         modification: [null],
         material: [null],
         sole: [null],
+        upperLeather: [null],
+        description: [null],
+        capDescription: [null],
+        soleDescription: [null],
         img1: [null],
         img2: [null],
     });

@@ -2,13 +2,13 @@
   <span class="title">ADD NEW SHOES</span>
 
   <form [formGroup]="shoesForm" class="shoes-form">
-    <div class="row">
+    <div class="row section">
       <div class="col-6">
         <div class="row">
           <div class="col form-field">
             <span class="label">SKU</span>
 
-            <input formControlName="sku" type="text" pInputText class="p-inputtext-sm">
+            <input formControlName="sku" type="text" pInputText class="p-inputtext-sm" placeholder="Input ...">
           </div>
         </div>
 
@@ -16,15 +16,40 @@
           <div class="col form-field">
             <span class="label">NAME</span>
 
-            <input formControlName="name" type="text" pInputText class="p-inputtext-sm">
+            <input formControlName="name" type="text" pInputText class="p-inputtext-sm" placeholder="Input ...">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">PRICE</span>
+
+            <input formControlName="price" type="text" pInputText class="p-inputtext-sm" placeholder="Input ...">
           </div>
         </div>
 
         <div class="row">
           <div class="col form-field">
+            <span class="label">SIZE</span>
+
+            <p-multiSelect formControlName="size" [options]="sizes" placeholder="Input ..."></p-multiSelect>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row space"></div>
+
+    <div class="row section">
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
             <span class="label">GENDER</span>
 
-            <p-dropdown formControlName="gender" [options]="genders" optionLabel="name" optionValue="id"></p-dropdown>
+            <p-dropdown formControlName="gender" [options]="genders" optionLabel="name" optionValue="id"
+              placeholder="Input ..."></p-dropdown>
           </div>
         </div>
 
@@ -32,7 +57,8 @@
           <div class="col form-field">
             <span class="label">FORM</span>
 
-            <p-dropdown formControlName="form" [options]="forms" optionLabel="name" optionValue="id"></p-dropdown>
+            <p-dropdown formControlName="form" [options]="forms" optionLabel="name" optionValue="id"
+              placeholder="Input ..."></p-dropdown>
           </div>
         </div>
 
@@ -40,26 +66,39 @@
           <div class="col form-field">
             <span class="label">SHOES CLASS</span>
 
-            <p-dropdown formControlName="shoesClass" [options]="shoesClass" optionLabel="name" optionValue="id">
+            <p-dropdown formControlName="shoesClass" [options]="shoesClass" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-field">
-            <span class="label">PROTECTION CLASS</span>
+            <span class="label">ZERTIFIKAT</span>
 
-            <p-dropdown formControlName="protectionClass" [options]="protectionClass" optionLabel="name"
-              optionValue="id">
+            <p-dropdown formControlName="zertifikat" [options]="zertifikats" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-field">
-            <span class="label">Public primary image url</span>
+            <span class="label">OBERLEDER</span>
 
-            <input formControlName="img1" type="text" pInputText class="p-inputtext-sm">
+            <p-dropdown formControlName="upperLeather" [options]="upperLeathers" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">OL Beschreibung</span>
+
+            <p-dropdown formControlName="description" [options]="descriptions" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
+            </p-dropdown>
           </div>
         </div>
       </div>
@@ -69,24 +108,9 @@
           <div class="col form-field">
             <span class="label">COLOR</span>
 
-            <p-dropdown formControlName="color" [options]="colors" optionLabel="name" optionValue="id">
+            <p-dropdown formControlName="color" [options]="colors" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-field">
-            <span class="label">SIZE</span>
-
-            <p-multiSelect formControlName="size" [options]="sizes"></p-multiSelect>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-field">
-            <span class="label">PRICE</span>
-
-            <input formControlName="price" type="text" pInputText class="p-inputtext-sm">
           </div>
         </div>
 
@@ -94,7 +118,8 @@
           <div class="col form-field">
             <span class="label">MODIFICATION</span>
 
-            <p-dropdown formControlName="modification" [options]="modifications" optionLabel="name" optionValue="id">
+            <p-dropdown formControlName="modification" [options]="modifications" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
           </div>
         </div>
@@ -103,7 +128,8 @@
           <div class="col form-field">
             <span class="label">MATERIAL</span>
 
-            <p-dropdown formControlName="material" [options]="materials" optionLabel="name" optionValue="id">
+            <p-dropdown formControlName="material" [options]="materials" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
           </div>
         </div>
@@ -112,24 +138,63 @@
           <div class="col form-field">
             <span class="label">SOLE</span>
 
-            <p-dropdown formControlName="sole" [options]="soles" optionLabel="name" optionValue="id">
+            <p-dropdown formControlName="sole" [options]="soles" optionLabel="name" optionValue="id"
+              placeholder="Input ...">
             </p-dropdown>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-field">
+            <span class="label">KAPPE BESCHREIBUNG</span>
+
+            <p-dropdown formControlName="capDescription" [options]="capDescriptions" optionLabel="name"
+              placeholder="Input ..." optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">SOHLE BESCHREIBUNG</span>
+
+            <p-dropdown formControlName="soleDescription" [options]="soleDescriptions" optionLabel="name"
+              appendTo="body" placeholder="Input ..." optionValue="id">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row space"></div>
+
+    <div class="row section">
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
+            <span class="label">Public primary image url</span>
+
+            <input formControlName="img1" type="text" pInputText class="p-inputtext-sm" placeholder="Input ...">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-field">
             <span class="label">Public secondary image url</span>
 
-            <input formControlName="img2" type="text" pInputText class="p-inputtext-sm">
+            <input formControlName="img2" type="text" pInputText class="p-inputtext-sm" placeholder="Input ...">
           </div>
         </div>
       </div>
     </div>
   </form>
 
-  <div class="space">
-    <div class="row">
+  <div>
+    <div class="row space"></div>
+
+    <div class="row button-section">
       <div class="col-6">
         <div class="row">
           <div class="col form-field">

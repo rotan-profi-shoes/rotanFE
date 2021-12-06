@@ -6,8 +6,23 @@
     min-height: 200px;
 }
 
-.form-field {
+.space {
+    height: 20px;
+}
+
+.section {
+    padding: 10px;
     margin: 0 20px;
+    border-radius: 10px;
+    background-color: #3ba8d1;
+}
+
+.button-section {
+    // margin: 0 20px;
+    padding: 0 20px;
+}
+
+.form-field {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;

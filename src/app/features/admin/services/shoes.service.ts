@@ -32,8 +32,8 @@ export class ShoesService {
     return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/shoes-class-types`);
   }
 
-  public getProtectionTypesList(): Observable<any> {
-    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/protection-class-types`);
+  public getZertifikatTypesList(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/zertifikat-types`);
   }
 
   public getColorTypesList(): Observable<any> {
@@ -54,5 +54,21 @@ export class ShoesService {
 
   public getSoleTypesList(): Observable<any> {
     return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/sole-types`);
+  }
+
+  public getUpperLeatherTypesList(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/upper-leather-types`);
+  }
+
+  public getDescriptionTypesList(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/description-types`);
+  }
+
+  public getCapDescriptionTypesList(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/cap-description-types`);
+  }
+
+  public getSoleDescriptionTypesList(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/sole-description-types`);
   }
 }
