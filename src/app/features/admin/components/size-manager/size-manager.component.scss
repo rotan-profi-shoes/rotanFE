@@ -1,0 +1,54 @@
+.label {
+    margin-bottom: 5px;
+    color: white;
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.no-sizes {
+    margin: 10px auto;
+    color: white;
+    font-size: 14px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+:host::ng-deep {
+    .p-dropdown {
+        width: 110px;
+        
+    }
+}
+
+p-inputnumber {
+    height: 33px;
+}
+
+.size-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.add-btn {
+    margin: 10px auto;
+}
+
+.trash-btn {
+    text-align: center;
+}
+
+.fa-trash-alt {
+    cursor: pointer;
+    color: red;
+}
+
+.header {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 14px;
+    font-family: 'Bebas Neue', cursive;
+}

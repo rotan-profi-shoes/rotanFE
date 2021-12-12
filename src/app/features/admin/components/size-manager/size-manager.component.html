@@ -1,0 +1,43 @@
+<span class="label">Available sizes</span>
+<div form [formGroup]="sizesManagementForm">
+  <div class="no-sizes" *ngIf="sizesRows.controls.length === 0">
+    No sizes for now. Please press 'Add size' to add new size.
+  </div>
+
+  <div class="header" *ngIf="sizesRows.controls.length !== 0">
+    <div class="col-4">Size</div>
+    <div class="col-4">Quantity</div>
+    <div class="col-3">Price</div>
+    <div class="col-1"></div>
+  </div>
+
+  <div formArrayName="sizes">
+    <div *ngFor="let row of sizesRows.controls; let index = index" [formGroupName]="index.toString()">
+      <div class="size-row">
+
+        <div class="col-4">
+          <p-dropdown formControlName="size_value" [options]="sizes" placeholder="Input ..."> </p-dropdown>
+        </div>
+
+        <div class="col-4">
+          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="size_value" [showButtons]="true" [min]="0"
+            [max]="100">
+          </p-inputNumber>
+        </div>
+
+        <div class="col-3">
+          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="size_value" [showButtons]="true"
+            mode="currency" currency="EUR">
+          </p-inputNumber>
+        </div>
+
+        <div class="col-1 trash-btn" (click)="deleteSize(index)">
+          <i class="fas fa-trash-alt"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Add size" (click)="addNewSize()"
+    class="p-button-sm p-button-warning add-btn"></button>
+</div>

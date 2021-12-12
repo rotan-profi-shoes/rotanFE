@@ -15,12 +15,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { ShoesTableComponent } from './components/shoes-table/shoes-table.component';
+import { SizeManagerComponent } from './components/size-manager/size-manager.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
     AdminLayoutContainer,
     ShoesFormComponent,
     ShoesTableComponent,
+    SizeManagerComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { ShoesTableComponent } from './components/shoes-table/shoes-table.compon
     HttpClientModule,
     DropdownModule,
     TableModule,
+    InputNumberModule,
   ],
   providers: [
     ShoesService,

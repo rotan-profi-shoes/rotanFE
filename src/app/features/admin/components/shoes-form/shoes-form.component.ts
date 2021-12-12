@@ -37,7 +37,11 @@ export class ShoesFormComponent implements OnInit {
     private readonly messageService: MessageService,
     private readonly router: Router,
   ) {
-   }
+  }
+
+  public get newSizes(): FormGroup {
+    return this.shoesForm.controls.shoes_sizes as FormGroup;
+  }
 
   public ngOnInit(): void {
     this.initForm();
@@ -95,8 +99,6 @@ export class ShoesFormComponent implements OnInit {
         shoesClass: [null],
         zertifikat: [null],
         color: [null],
-        size: [null],
-        price: [null],
         modification: [null],
         material: [null],
         sole: [null],
@@ -106,6 +108,11 @@ export class ShoesFormComponent implements OnInit {
         soleDescription: [null],
         img1: [null],
         img2: [null],
+        sizes: this.formBuilder.array([]),
+        shoes_sizes: this.formBuilder.group({
+          sizes: this.formBuilder.array([]),
+        }),
+        // sizes: this.formBuilder.array([]),
     });
   }
 }
