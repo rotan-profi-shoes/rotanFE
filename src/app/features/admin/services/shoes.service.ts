@@ -17,7 +17,7 @@ export class ShoesService {
   }
 
   public getShoesBySku(sku: string): Observable<any> {
-    return this.http.get<any>(`${environment.rotanApiHost}/api/shoes/${sku}`);
+    return this.http.get<any>(`${environment.rotanApiHost}/api/shoes/find/${sku}`);
   }
 
   public addShoes(shoes: any): Observable<any> {

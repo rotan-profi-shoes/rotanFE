@@ -52,6 +52,9 @@ export class ShoesFormComponent implements OnInit {
   }
 
   public getAllOptions(): void {
+
+    this.shoesService.getMaterialTypesList().subscribe(resp => console.log(resp));
+
     forkJoin([
       this.shoesService.getColorTypesList(),
       this.shoesService.getFormTypesList(),
