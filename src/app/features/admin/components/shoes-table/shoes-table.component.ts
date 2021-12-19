@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/api';
   selector: 'app-shoes-table',
   templateUrl: './shoes-table.component.html',
   styleUrls: ['./shoes-table.component.scss'],
+  providers: [ConfirmationService],
 })
 export class ShoesTableComponent implements OnInit {
   public shoes: any;
@@ -23,7 +24,7 @@ export class ShoesTableComponent implements OnInit {
     })
   }
 
-  public confirm(): void {
+  public confirm(shoe: any): void {
     this.confirmationService.confirm({
         message: 'Are you sure that you want to proceed?',
         header: 'Confirmation',

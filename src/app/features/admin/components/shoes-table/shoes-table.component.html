@@ -26,8 +26,10 @@
         <button pButton pRipple type="button" icon="fas fa-edit" class="p-button p-button-primary">
         </button>
 
-        <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger" (click)="confirm()">
+        <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
+          (click)="confirm(shoe)">
         </button>
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
       </td>
     </tr>
   </ng-template>

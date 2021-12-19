@@ -22,7 +22,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SizesService } from './services/sizes.service';
 import { ShoesInfoComponent } from './components/shoes-info/shoes-info.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { ConfirmationService } from 'primeng/api';
   providers: [
     ShoesService,
     SizesService,
-    ConfirmationService,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptor, 
