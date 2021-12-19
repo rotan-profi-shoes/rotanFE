@@ -16,6 +16,10 @@ export class ShoesService {
     return this.http.get<any[]>(`${environment.rotanApiHost}/api/shoes`);
   }
 
+  public getShoesBySku(sku: string): Observable<any> {
+    return this.http.get<any>(`${environment.rotanApiHost}/api/shoes/${sku}`);
+  }
+
   public addShoes(shoes: any): Observable<any> {
     return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/shoes/add`, shoes);
   }

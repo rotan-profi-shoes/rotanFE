@@ -10,10 +10,7 @@
       <th>SKU</th>
       <th>Image</th>
       <th>Name</th>
-      <th>Price</th>
-      <th>Class type</th>
-      <th>Sole type</th>
-      <th>Modification type</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-shoe>
@@ -21,10 +18,17 @@
       <td>{{ shoe.sku }}</td>
       <td><img [src]="shoe.img1" width="100" class="p-shadow-4" /></td>
       <td>{{ shoe.name }}</td>
-      <td>{{ shoe.price | currency:'USD' }}</td>
-      <td>{{ shoe.shoesClass.name }}</td>
-      <td>{{ shoe.sole.name }}</td>
-      <td>{{ shoe.modification.name }}</td>
+      <td class="actions">
+        <button pButton pRipple type="button" icon="fas fa-info" class="p-button p-button-warning"
+          [routerLink]="[shoe.sku]">
+        </button>
+
+        <button pButton pRipple type="button" icon="fas fa-edit" class="p-button p-button-primary">
+        </button>
+
+        <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger" (click)="confirm()">
+        </button>
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">

@@ -8,7 +8,6 @@
     <div class="col-4">Size</div>
     <div class="col-4">Quantity</div>
     <div class="col-3">Price</div>
-    <div class="col-1"></div>
   </div>
 
   <div formArrayName="sizes">
@@ -16,18 +15,18 @@
       <div class="size-row">
 
         <div class="col-4">
-          <p-dropdown formControlName="size_value" [options]="sizes" placeholder="Input ..."> </p-dropdown>
+          <p-dropdown formControlName="sizeValue" [options]="sizes" placeholder="Select ..."> </p-dropdown>
         </div>
 
         <div class="col-4">
-          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="size_value" [showButtons]="true" [min]="0"
-            [max]="100">
+          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="quantity" [showButtons]="true" [min]="0"
+            placeholder="Input ..." [max]="100">
           </p-inputNumber>
         </div>
 
         <div class="col-3">
-          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="size_value" [showButtons]="true"
-            mode="currency" currency="EUR">
+          <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="price" [showButtons]="true" mode="currency"
+            placeholder="Input ..." currency="EUR">
           </p-inputNumber>
         </div>
 

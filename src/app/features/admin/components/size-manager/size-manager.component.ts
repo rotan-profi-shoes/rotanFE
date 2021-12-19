@@ -32,21 +32,25 @@ export class SizeManagerComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.apiService.getSizesTypesList().subscribe(resp => this.sizes = resp);
+    this.apiService.getSizesTypesList().subscribe(response => this.sizes = response);
   }
 
   public addNewSize(): void {
+    if (this.sizesManagementForm.invalid) {
+
+      return;
+    }
+
     this.sizesRows.push(
       this.formBuilder.group({
-        size_value: [null, Validators.required],
+        sizeValue: [null, Validators.required],
         quantity: [null, Validators.required],
         price: [null, Validators.required],
       }),
-    )
+    );
   }
 
   public deleteSize(index: number): void {
-    console.log('test');
     this.sizesRows.removeAt(index);
   }
 }

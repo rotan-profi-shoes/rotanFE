@@ -8,6 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShoesFormComponent } from './components/shoes-form/shoes-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { GalleriaModule } from 'primeng/galleria';
+import { ImageModule } from 'primeng/image';
 import { ShoesService } from './services/shoes.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
@@ -17,6 +19,10 @@ import { TableModule } from 'primeng/table';
 import { ShoesTableComponent } from './components/shoes-table/shoes-table.component';
 import { SizeManagerComponent } from './components/size-manager/size-manager.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SizesService } from './services/sizes.service';
+import { ShoesInfoComponent } from './components/shoes-info/shoes-info.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,6 +30,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ShoesFormComponent,
     ShoesTableComponent,
     SizeManagerComponent,
+    ShoesInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -37,10 +44,15 @@ import { InputNumberModule } from 'primeng/inputnumber';
     HttpClientModule,
     DropdownModule,
     TableModule,
+    ImageModule,
     InputNumberModule,
+    GalleriaModule,
+    ConfirmDialogModule,
   ],
   providers: [
     ShoesService,
+    SizesService,
+    ConfirmationService,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptor, 
