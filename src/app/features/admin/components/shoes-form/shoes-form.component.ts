@@ -101,12 +101,10 @@ export class ShoesFormComponent implements OnInit {
 
     this.shoesService.addShoes(this.shoesForm.value).pipe(
       switchMap((resp) => {
-        console.log(resp.sku);
-
         const prepareSizes = this.shoesForm.controls.shoesSizes.get('sizes').value;
 
         prepareSizes.forEach(element => {
-          element.sku = resp.sku;
+          element.shoesId = resp._id;
         });
 
         return this.sizesService.addSizes(prepareSizes)

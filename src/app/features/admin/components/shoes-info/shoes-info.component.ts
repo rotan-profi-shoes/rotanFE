@@ -29,8 +29,8 @@ export class ShoesInfoComponent implements OnInit, OnDestroy {
       this.route.params.pipe(
        switchMap((params: any) => {
          return forkJoin([
-           this.shoesService.getShoesBySku(params.id),
-           this.sizesService.getSizesBySku(params.id),
+           this.shoesService.getShoesById(params.id),
+           this.sizesService.getSizesById(params.id),
          ])
        })
       ).subscribe(([shoes, sizes]) => {

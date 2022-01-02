@@ -14,9 +14,13 @@ export class SizesService {
 
   public addSizes(sizes: []): Observable<any> {
     return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/sizes/add`, sizes);
-  }
+  };
 
-  public getSizesBySku(sku: string): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.rotanApiHost}/api/sizes/${sku}`);
-  }
+  public getSizesById(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.rotanApiHost}/api/sizes/${id}`);
+  };
+
+  public deleteSizesBySku(sku: string): Observable<any> {
+    return this.http.delete<any>(`${environment.rotanApiHost}/api/sizes/${sku}`);
+  };
 }

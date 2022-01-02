@@ -20,22 +20,24 @@
       <td>{{ shoe.name }}</td>
       <td class="actions">
         <button pButton pRipple type="button" icon="fas fa-info" class="p-button p-button-warning"
-          [routerLink]="[shoe.sku]">
+          [routerLink]="['view', shoe._id]">
         </button>
 
         <button pButton pRipple type="button" icon="fas fa-edit" class="p-button p-button-primary">
         </button>
 
         <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
-          (click)="confirm(shoe)">
+          (click)="deleteDialog(shoe)">
         </button>
-        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="summary">
+  <!-- <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
       In total there are {{ shoes ? shoes.length : 0 }} shoes.
     </div>
-  </ng-template>
+  </ng-template> -->
 </p-table>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

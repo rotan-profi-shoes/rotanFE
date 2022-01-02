@@ -16,8 +16,12 @@ export class ShoesService {
     return this.http.get<any[]>(`${environment.rotanApiHost}/api/shoes`);
   }
 
-  public getShoesBySku(sku: string): Observable<any> {
-    return this.http.get<any>(`${environment.rotanApiHost}/api/shoes/find/${sku}`);
+  public getShoesById(id: string): Observable<any> {
+    return this.http.get<any>(`${environment.rotanApiHost}/api/shoes/find/${id}`);
+  }
+
+  public deleteShoesById(id: string): Observable<any> {
+    return this.http.delete<any>(`${environment.rotanApiHost}/api/shoes/${id}`);
   }
 
   public addShoes(shoes: any): Observable<any> {

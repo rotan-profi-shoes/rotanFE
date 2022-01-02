@@ -19,14 +19,10 @@ const routes: Routes = [
         component: ShoesFormComponent,
       },
       {
-        path: ':id',
+        path: 'view/:id',
         component: ShoesInfoComponent,
       }
     ],
-  },
-  {
-    path: '**',
-    redirectTo: '',
   },
 ];
 
