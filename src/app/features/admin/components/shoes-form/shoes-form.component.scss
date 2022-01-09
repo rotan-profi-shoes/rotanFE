@@ -49,3 +49,35 @@
 ::ng-deep .p-dropdown {
     width: 100%;
 }
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background-color: transparent;
+    font-weight: unset;
+    font-family: 'Bebas Neue', cursive;
+    color: white;
+    vertical-align: middle;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th:last-child {
+    text-align: right;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr {
+    background-color: transparent;
+    // font-family: 'Bebas Neue', cursive;
+    color: white;
+    font-weight: unset;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td  {
+    vertical-align: middle;
+    // border-bottom: none;
+} 
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child  {
+    text-align: right;
+}
+
+.btn-margin {
+    margin: 0 20px;
+}

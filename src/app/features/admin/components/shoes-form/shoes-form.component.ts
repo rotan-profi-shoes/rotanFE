@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { ShoesService } from '../../services/shoes.service';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { SizesService } from '../../services/sizes.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { SizeFormComponent } from '../size-form/size-form.component';
 
 interface Item {
   id: string,
-  name: string
+  name: string,
 }
 
 @Component({
   selector: 'app-shoes-form',
   templateUrl: './shoes-form.component.html',
-  styleUrls: ['./shoes-form.component.scss']
+  styleUrls: ['./shoes-form.component.scss'],
+  providers: [ConfirmationService, DialogService],
 })
-export class ShoesFormComponent implements OnInit {
+export class ShoesFormComponent implements OnInit, OnDestroy {
   public shoesForm: FormGroup;
   public genders: Item[];
   public forms: Item[];
@@ -32,14 +35,25 @@ export class ShoesFormComponent implements OnInit {
   public descriptions: Item[];
   public capDescriptions: Item[];
   public soleDescriptions: Item[];
+  public isEditMode: boolean = false;
+  public sizesTable: any;
+  public shoesId: string;
+
+  private subscription: Subscription = new Subscription();
 
   constructor(
+    private confirmationService: ConfirmationService,
+    private readonly dialogService: DialogService,
     private readonly formBuilder: FormBuilder,
     private readonly shoesService: ShoesService,
     private readonly sizesService: SizesService,
     private readonly messageService: MessageService,
     private readonly router: Router,
+    private readonly route: ActivatedRoute,
   ) {
+    if (this.router.url.includes('edit')) {
+      this.isEditMode = true;
+    }
   }
 
   public get newSizes(): FormGroup {
@@ -49,12 +63,47 @@ export class ShoesFormComponent implements OnInit {
   public ngOnInit(): void {
     this.initForm();
     this.getAllOptions();
+
+    if (this.isEditMode) {
+      this.subscription.add(
+      this.route.params.pipe(
+        switchMap((params: any) => {
+          this.shoesId = params.id;
+
+          return forkJoin([
+            this.shoesService.getShoesById(params.id),
+            this.sizesService.getSizesById(params.id),
+          ])
+        })
+       ).subscribe(([shoes, sizes]) => {
+         const shoesForPatch = {
+           ...shoes,
+           gender: shoes.gender.id,
+           color: shoes.color.id,
+           form: shoes.form.id,
+           shoesClass: shoes.shoesClass.id,
+           zertifikat: shoes.zertifikat.id,
+           sole: shoes.sole.id,
+           material: shoes.material.id,
+           modification: shoes.modification.id,
+           upperLeather: shoes.upperLeather.id,
+           description: shoes.description.id,
+           capDescription: shoes.capDescription.id,
+           soleDescription: shoes.soleDescription.id,
+         };
+
+         this.sizesTable = sizes;
+
+         this.shoesForm.patchValue(shoesForPatch);
+       }));
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public getAllOptions(): void {
-
-    this.shoesService.getMaterialTypesList().subscribe(resp => console.log(resp));
-
     forkJoin([
       this.shoesService.getColorTypesList(),
       this.shoesService.getFormTypesList(),
@@ -83,6 +132,42 @@ export class ShoesFormComponent implements OnInit {
       this.descriptions = descriptions;
       this.capDescriptions = capDescriptions;
       this.soleDescriptions = soleDescriptions;
+    });
+  }
+
+  public openSizeDialog(size?: any): void {
+    const ref = this.dialogService.open(SizeFormComponent, {
+      header: !size ? 'Add new size' : `Edit size ${size.sizeValue}`,
+      width: '70%',
+      data: {
+        size: size || null,
+        shoesId: this.shoesId,
+      },
+    });
+
+    ref.onClose.subscribe(() => {
+      this.sizesService.getSizesById(this.shoesId).subscribe((sizes) => {
+        this.sizesTable = sizes;
+      })
+    });
+  }
+
+  public deleteDialog(size: any): void {
+    console.log('test, ', size);
+    this.confirmationService.confirm({
+        message: `Are you sure that you want remove size ${size.sizeValue}?`,
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.sizesService.deleteSizesById(size._id).subscribe(() => {
+            this.sizesService.getSizesById(this.shoesId).subscribe((sizes) => {
+              this.sizesTable = sizes;
+            })
+          });
+        },
+        reject: () => {;
+            // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+        }
     });
   }
 

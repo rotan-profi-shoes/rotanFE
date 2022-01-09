@@ -49,5 +49,5 @@ export class ShoesTableComponent implements OnInit {
             // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
         }
     });
-}
+  }
 }

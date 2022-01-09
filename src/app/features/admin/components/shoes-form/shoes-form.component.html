@@ -149,10 +149,55 @@
         </div>
       </div>
 
-      <div class="col-6">
+      <div *ngIf="!isEditMode" class="col-6">
         <div class="row">
           <app-size-manager [sizesManagementForm]="newSizes">
           </app-size-manager>
+        </div>
+      </div>
+
+      <div *ngIf="isEditMode" class="col-6">
+        <div class="row space">
+          <div class="col label-info">
+
+            <p-table [value]="sizesTable" responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Size value</th>
+                  <th></th>
+                  <th></th>
+                  <th>Quantity</th>
+                  <th></th>
+                  <th>Price</th>
+                  <th>
+                    <button pButton pRipple type="button" icon="fas fa-plus" label="Add size"
+                      class="p-button p-button-warning" (click)="openSizeDialog()">
+                    </button>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-size>
+                <tr>
+                  <td>{{ size.sizeValue }}</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{ size.quantity }}</td>
+                  <td></td>
+                  <td>{{ size.price | currency:'EUR' }}</td>
+                  <td>
+                    <button pButton pRipple type="button" icon="fas fa-edit" class="btn-margin p-button p-button-help"
+                      (click)="openSizeDialog(size)">
+                    </button>
+
+                    <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
+                      (click)="deleteDialog(size)">
+                    </button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+          </div>
         </div>
       </div>
     </div>
@@ -206,3 +251,5 @@
     </div>
   </div>
 </div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

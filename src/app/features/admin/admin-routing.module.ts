@@ -21,7 +21,11 @@ const routes: Routes = [
       {
         path: 'view/:id',
         component: ShoesInfoComponent,
-      }
+      },
+      {
+        path: 'edit/:id',
+        component: ShoesFormComponent,
+      },
     ],
   },
 ];

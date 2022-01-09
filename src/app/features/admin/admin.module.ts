@@ -22,6 +22,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SizesService } from './services/sizes.service';
 import { ShoesInfoComponent } from './components/shoes-info/shoes-info.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SizeFormComponent } from './components/size-form/size-form.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ShoesTableComponent,
     SizeManagerComponent,
     ShoesInfoComponent,
+    SizeFormComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     InputNumberModule,
     GalleriaModule,
     ConfirmDialogModule,
+    DynamicDialogModule,
   ],
   providers: [
     ShoesService,
