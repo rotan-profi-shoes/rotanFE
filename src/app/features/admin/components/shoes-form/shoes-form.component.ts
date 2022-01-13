@@ -38,6 +38,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   public isEditMode: boolean = false;
   public sizesTable: any;
   public shoesId: string;
+  public submitButtonLabel: string = 'SCHUHE HINZUFÜGEN';
+  public currentShoes: any;
 
   private subscription: Subscription = new Subscription();
 
@@ -53,6 +55,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   ) {
     if (this.router.url.includes('edit')) {
       this.isEditMode = true;
+      this.submitButtonLabel = "SCHUHE BEARBEITEN";
     }
   }
 
@@ -76,6 +79,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           ])
         })
        ).subscribe(([shoes, sizes]) => {
+         this.currentShoes = shoes;
+
          const shoesForPatch = {
            ...shoes,
            gender: shoes.gender.id,
@@ -137,7 +142,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public openSizeDialog(size?: any): void {
     const ref = this.dialogService.open(SizeFormComponent, {
-      header: !size ? 'Add new size' : `Edit size ${size.sizeValue}`,
+      header: !size ? 'Neue Größe hinzufügen' : `Größe bearbeiten ${size.sizeValue}`,
       width: '70%',
       data: {
         size: size || null,
@@ -153,10 +158,9 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   }
 
   public deleteDialog(size: any): void {
-    console.log('test, ', size);
     this.confirmationService.confirm({
-        message: `Are you sure that you want remove size ${size.sizeValue}?`,
-        header: 'Confirmation',
+        message: `Sind Sie sicher, dass Sie die Größe entfernen möchten ${size.sizeValue}?`,
+        header: 'Bestätigung',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.sizesService.deleteSizesById(size._id).subscribe(() => {
@@ -173,38 +177,67 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public submit(): void {
     if (!this.shoesForm.valid) {
-      this.messageService.add({severity:'error', summary:'Error', detail: 'All fields are required.'});
+      this.messageService.add({severity:'error', summary:'Fehler', detail: 'Alle Felder sind erforderlich.'});
 
       return;
     }
 
-    if (this.shoesForm.controls.shoesSizes.get('sizes').value.length === 0) {
-      this.messageService.add({severity:'error', summary:'Error', detail: 'Add at least one size.'});
+    if (!this.isEditMode && this.shoesForm.controls.shoesSizes.get('sizes').value.length === 0) {
+      this.messageService.add({severity:'error', summary:'Fehler', detail: 'Fügen Sie mindestens eine Größe hinzu.'});
 
       return;
     }
 
-    this.shoesService.addShoes(this.shoesForm.value).pipe(
-      switchMap((resp) => {
-        const prepareSizes = this.shoesForm.controls.shoesSizes.get('sizes').value;
+    if (!this.isEditMode) {
+      this.shoesService.addShoes(this.shoesForm.value).pipe(
+        switchMap((resp) => {
+          const prepareSizes = this.shoesForm.controls.shoesSizes.get('sizes').value;
 
-        prepareSizes.forEach(element => {
-          element.shoesId = resp._id;
-        });
+          prepareSizes.forEach(element => {
+            element.shoesId = resp._id;
+          });
 
-        return this.sizesService.addSizes(prepareSizes)
-      })).subscribe((sizesResponse) => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'Shoes added with success.'});
+          return this.sizesService.addSizes(prepareSizes);
+        })
+      ).subscribe((sizesResponse) => {
+        this.messageService.add({severity:'success', summary:'Erfolg', detail:'Schuhe mit Erfolg hinzugefügt.'});
         this.router.navigate(['admin']);
       },
       (mainError) => {
-        this.messageService.add({severity:'error', summary:'Error', detail: mainError.error});
+        this.messageService.add({severity:'error', summary:'Fehler', detail: mainError.error});
       });
+    } else {
+      this.shoesService.editShoes(this.currentShoes._id, this.shoesForm.value).subscribe((updatedShoes: any) => {
+        this.messageService.add({severity:'success', summary:'Erfolg', detail:'Schuhe wurde mit Erfolg aktualisiert.'});
+
+        const shoesForPatch = {
+          ...updatedShoes,
+          gender: updatedShoes.gender?.id,
+          color: updatedShoes.color?.id,
+          form: updatedShoes.form?.id,
+          shoesClass: updatedShoes.shoesClass?.id,
+          zertifikat: updatedShoes.zertifikat?.id,
+          sole: updatedShoes.sole?.id,
+          material: updatedShoes.material?.id,
+          modification: updatedShoes.modification?.id,
+          upperLeather: updatedShoes.upperLeather?.id,
+          description: updatedShoes.description?.id,
+          capDescription: updatedShoes.capDescription?.id,
+          soleDescription: updatedShoes.soleDescription?.id,
+        };
+
+        this.shoesForm.patchValue(shoesForPatch);
+
+      }),
+      (mainError) => {
+        this.messageService.add({severity:'error', summary:'Fehler', detail: mainError.error});
+      };
+    }
   }
 
   private initForm(): void {
     this.shoesForm = this.formBuilder.group({
-        sku: [null, Validators.required],
+        sku: [{ value: null, disabled: this.isEditMode }, Validators.required],
         name: [null, Validators.required],
         gender: [null, Validators.required],
         form: [null, Validators.required],

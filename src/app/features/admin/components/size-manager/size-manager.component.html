@@ -1,13 +1,13 @@
-<span class="label">Available sizes</span>
+<span class="label">Verfügbare Größen</span>
 <div form [formGroup]="sizesManagementForm">
   <div class="no-sizes" *ngIf="sizesRows.controls.length === 0">
-    No sizes for now. Please press 'Add size' to add new size.
+    Vorerst keine Größen. Bitte klicken Sie auf „Größe hinzufügen“, um eine neue Größe hinzuzufügen.
   </div>
 
   <div class="header" *ngIf="sizesRows.controls.length !== 0">
-    <div class="col-4">Size</div>
-    <div class="col-4">Quantity</div>
-    <div class="col-3">Price</div>
+    <div class="col-4">Größe</div>
+    <div class="col-4">Menge</div>
+    <div class="col-3">Preis</div>
   </div>
 
   <div formArrayName="sizes">
@@ -15,18 +15,18 @@
       <div class="size-row">
 
         <div class="col-4">
-          <p-dropdown formControlName="sizeValue" [options]="sizes" placeholder="Select ..."> </p-dropdown>
+          <p-dropdown formControlName="sizeValue" [options]="sizes" placeholder="Wählen ..."> </p-dropdown>
         </div>
 
         <div class="col-4">
           <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="quantity" [showButtons]="true" [min]="0"
-            placeholder="Input ..." [max]="100">
+            placeholder="Eingang ..." [max]="100">
           </p-inputNumber>
         </div>
 
         <div class="col-3">
           <p-inputNumber [inputStyle]="{width: '90px'}" formControlName="price" [showButtons]="true" mode="currency"
-            placeholder="Input ..." currency="EUR">
+            placeholder="Eingang ..." currency="EUR">
           </p-inputNumber>
         </div>
 
@@ -37,6 +37,6 @@
     </div>
   </div>
 
-  <button pButton type="submit" label="Add size" (click)="addNewSize()"
+  <button pButton type="submit" icon="fas fa-plus" label="Größe hinzufügen" (click)="addNewSize()"
     class="p-button-sm p-button-warning add-btn"></button>
 </div>

@@ -3,10 +3,10 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Size</span>
+          <span class="label">Größe</span>
 
           <p-dropdown formControlName="sizeValue" [disabled]="isEditMode" appendTo="body" [options]="sizes"
-            placeholder="Select ...">
+            placeholder="Wählen ...">
           </p-dropdown>
         </div>
       </div>
@@ -15,9 +15,10 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Quantity</span>
+          <span class="label">Menge</span>
 
-          <p-inputNumber formControlName="quantity" [showButtons]="true" [min]="0" placeholder="Input ..." [max]="100">
+          <p-inputNumber formControlName="quantity" [showButtons]="true" [min]="0" placeholder="Eingang ..."
+            [max]="100">
           </p-inputNumber>
         </div>
       </div>
@@ -26,9 +27,9 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Price</span>
+          <span class="label">Preis</span>
 
-          <p-inputNumber formControlName="price" [showButtons]="true" mode="currency" placeholder="Input ..."
+          <p-inputNumber formControlName="price" [showButtons]="true" mode="currency" placeholder="Eingang ..."
             currency="EUR">
           </p-inputNumber>
         </div>
@@ -41,7 +42,8 @@
   <div class="col-6">
     <div class="row">
       <div class="col form-field">
-        <button pButton type="submit" label="CANCEL" class="p-button-sm p-button-secondary"></button>
+        <button pButton type="submit" label="ABBRECHEN" class="p-button-sm p-button-secondary"
+          (click)="close()"></button>
       </div>
     </div>
   </div>
@@ -49,7 +51,7 @@
   <div class="col-6">
     <div class="row">
       <div class="col form-field">
-        <button pButton type="submit" [label]="!isEditMode ? 'ADD SIZE' : 'UPDATE SIZE'"
+        <button pButton type="submit" [label]="!isEditMode ? 'GRÖSSE HINZUFÜGEN' : 'GRÖSSE AKTUALISIEREN'"
           class="p-button-sm p-button-warning" (click)="addSize()"></button>
       </div>
     </div>

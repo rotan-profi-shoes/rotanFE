@@ -65,6 +65,10 @@ export class SizeFormComponent implements OnInit {
     }
   }
 
+  public close(): void {
+    this.ref.close();
+  }
+
   private initForm(): void {
     this.sizeForm = this.formBuilder.group({
       sizeValue: [null, Validators.required],

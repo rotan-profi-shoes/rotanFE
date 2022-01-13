@@ -12,6 +12,10 @@ export class ShoesService {
     private readonly http: HttpClient,
   ) { } 
 
+  public editShoes(id: string, shoes: any): Observable<any> {
+    return this.http.put<any>(`${environment.rotanApiHost}/api/shoes/update-one/${id}`, shoes);
+  }
+
   public getShoesList(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.rotanApiHost}/api/shoes`);
   }

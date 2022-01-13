@@ -1,14 +1,17 @@
-<p-table [value]="shoes" responsiveLayout="scroll">
-  <!-- <ng-template pTemplate="caption">
+<p-table [value]="isSearchEmpty ? shoes : shoesTableData" responsiveLayout="scroll">
+  <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
-      Shoes
-      <p-button icon="pi pi-refresh"></p-button>
+      <input [formControl]="generalSearch" type="text" pInputText class="p-inputtext-sm"
+        placeholder="Suche nach SKU ...">
+
+      <button pButton pRipple type="button" icon="fas fa-times" class="p-button p-button-primary"
+        (click)="clearSearch()"></button>
     </div>
-  </ng-template> -->
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>SKU</th>
-      <th>Image</th>
+      <th>Bild</th>
       <th>Name</th>
       <th></th>
     </tr>
@@ -35,10 +38,11 @@
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      In total there are {{ shoes ? shoes.length : 0 }} shoes.
+      Insgesamt befinden sich {{ shoes ? shoes.length : 0 }} Schuhe im System.
     </div>
   </ng-template>
 </p-table>
 
 
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog header="Confirmation" acceptLabel="JA" rejectLabel="NEIN" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
