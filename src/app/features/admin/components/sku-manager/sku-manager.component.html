@@ -1,0 +1,52 @@
+<div class="back-panel">
+  <button pButton pRipple type="button" label="kehren Sie zurück" icon="fas fa-chevron-circle-left" [routerLink]="['']"
+          class="p-button custom">
+  </button>
+
+  <span class="title">All parent sku: </span>
+</div>
+<p-table [value]="isSearchEmpty ? skus : skuTableData" responsiveLayout="scroll">
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <input [formControl]="generalSearch" type="text" pInputText class="p-inputtext-sm"
+               placeholder="Search PARENT SKU ...">
+
+        <button pButton pRipple type="button" icon="fas fa-times" class="p-button p-button-primary"
+                (click)="clearSearch()"></button>
+      </div>
+
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <button pButton pRipple type="button" label="Add new Parent SKU" icon="fas fa-plus"
+                class="p-button p-button-primary"
+                (click)="openAddSkuDialog()"></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Parent SKU</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-sku>
+    <tr>
+      <td>{{ sku.parentSku }}</td>
+      <td class="actions">
+        <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
+                (click)="deleteDialog(sku)">
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are {{ skus ? skus.length : 0 }} "PARENT SKU" in the system.
+    </div>
+  </ng-template>
+</p-table>
+
+
+<p-confirmDialog header="Confirmation" acceptLabel="JA" rejectLabel="NEIN" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+

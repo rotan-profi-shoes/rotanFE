@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { SizesService } from '../../services/sizes.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { SizeFormComponent } from '../size-form/size-form.component';
+import { SkuService } from '../../services/sku.service';
 
 interface Item {
   id: string,
@@ -35,6 +36,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   public descriptions: Item[];
   public capDescriptions: Item[];
   public soleDescriptions: Item[];
+  public parentSku: any[];
   public isEditMode: boolean = false;
   public sizesTable: any;
   public shoesId: string;
@@ -49,6 +51,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
     private readonly formBuilder: FormBuilder,
     private readonly shoesService: ShoesService,
     private readonly sizesService: SizesService,
+    private readonly skuService: SkuService,
     private readonly messageService: MessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -83,6 +86,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
          const shoesForPatch = {
            ...shoes,
+           parentSku: shoes?.parentSku?.parentSku,
            gender: shoes.gender.id,
            color: shoes.color.id,
            form: shoes.form.id,
@@ -123,7 +127,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       this.shoesService.getDescriptionTypesList(),
       this.shoesService.getCapDescriptionTypesList(),
       this.shoesService.getSoleDescriptionTypesList(),
-    ]).subscribe(([ colors, forms, genders, sizes, shoesClass, zertifikats, soles, materials, modifications, upperLeathers, descriptions, capDescriptions, soleDescriptions ]) => {
+      this.skuService.getSkuList(),
+    ]).subscribe(([ colors, forms, genders, sizes, shoesClass, zertifikats, soles, materials, modifications, upperLeathers, descriptions, capDescriptions, soleDescriptions, skuList ]) => {
       this.colors = colors;
       this.forms = forms;
       this.genders = genders;
@@ -137,6 +142,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       this.descriptions = descriptions;
       this.capDescriptions = capDescriptions;
       this.soleDescriptions = soleDescriptions;
+      this.parentSku = skuList;
     });
   }
 
@@ -177,13 +183,13 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public submit(): void {
     if (!this.shoesForm.valid) {
-      this.messageService.add({severity:'error', summary:'Fehler', detail: 'Alle Felder sind erforderlich.'});
+      this.messageService.add({severity:'error', summary:'Error', detail: 'All fields are required.'});
 
       return;
     }
 
     if (!this.isEditMode && this.shoesForm.controls.shoesSizes.get('sizes').value.length === 0) {
-      this.messageService.add({severity:'error', summary:'Fehler', detail: 'Fügen Sie mindestens eine Größe hinzu.'});
+      this.messageService.add({severity:'error', summary:'Error', detail: 'Add at least one size.'});
 
       return;
     }
@@ -212,6 +218,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
         const shoesForPatch = {
           ...updatedShoes,
+          parentSku: updatedShoes.parentSku.parentSku,
           gender: updatedShoes.gender?.id,
           color: updatedShoes.color?.id,
           form: updatedShoes.form?.id,
@@ -238,6 +245,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   private initForm(): void {
     this.shoesForm = this.formBuilder.group({
         sku: [{ value: null, disabled: this.isEditMode }, Validators.required],
+        parentSku: [null, Validators.required],
         name: [null, Validators.required],
         gender: [null, Validators.required],
         form: [null, Validators.required],

@@ -1,48 +1,70 @@
-<p-table [value]="isSearchEmpty ? shoes : shoesTableData" responsiveLayout="scroll">
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      <input [formControl]="generalSearch" type="text" pInputText class="p-inputtext-sm"
-        placeholder="Suche nach SKU ...">
-
-      <button pButton pRipple type="button" icon="fas fa-times" class="p-button p-button-primary"
-        (click)="clearSearch()"></button>
-    </div>
-  </ng-template>
+<p-table [value]="groupedShoes" dataKey="name">
   <ng-template pTemplate="header">
     <tr>
-      <th>SKU</th>
-      <th>Bild</th>
-      <th>Name</th>
-      <th></th>
+      <th style="width: 3rem"></th>
+      <th>Parent SKU</th>
+      <th>Models quantity</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-shoe>
+  <ng-template pTemplate="body" let-parentSku let-expanded="expanded">
     <tr>
-      <td>{{ shoe.sku }}</td>
-      <td><img [src]="shoe.img1" width="100" class="p-shadow-4" /></td>
-      <td>{{ shoe.name }}</td>
-      <td class="actions">
-        <button pButton pRipple type="button" icon="fas fa-info" class="p-button p-button-warning"
-          [routerLink]="['view', shoe._id]">
-        </button>
+      <td>
+        <button type="button" pButton pRipple [pRowToggler]="parentSku"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+      <td>{{ parentSku.name }}</td>
+      <td>{{ parentSku.shoes.length }}</td>
+    </tr>
+  </ng-template>
 
-        <button pButton pRipple type="button" icon="fas fa-edit" class="p-button p-button-primary"
-          [routerLink]="['edit', shoe._id]">
-        </button>
+  <ng-template pTemplate="rowexpansion" let-parentSku>
+    <tr>
+      <td colspan="7">
+        <div class="p-p-3">
+          <p-table [value]="parentSku.shoes" dataKey="sku">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>SKU</th>
+                  <th>Bild</th>
+                  <th>Name</th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-shoe>
+                <tr>
+                  <td>{{ shoe.sku }}</td>
+                  <td><img [src]="shoe.img1" width="100" class="p-shadow-4" /></td>
+                  <td>{{ shoe.name }}</td>
+                  <td class="actions">
+<!--                    <button pButton pRipple type="button" icon="fas fa-info" class="p-button p-button-warning"-->
+<!--                      [routerLink]="['view', shoe._id]">-->
+<!--                    </button>-->
+                    <button pButton pRipple type="button" icon="fas fa-copy" class="p-button p-button-warning"
+                            (click)="copyDialog(shoe)">
+                    </button>
 
-        <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
-          (click)="deleteDialog(shoe)">
-        </button>
+                    <button pButton pRipple type="button" icon="fas fa-edit" class="p-button p-button-primary"
+                      [routerLink]="['edit', shoe._id]">
+                    </button>
+
+                    <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
+                      (click)="deleteDialog(shoe)">
+                    </button>
+                  </td>
+                </tr>
+              </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="6">There are no order for this product yet.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      Insgesamt befinden sich {{ shoes ? shoes.length : 0 }} Schuhe im System.
-    </div>
-  </ng-template>
 </p-table>
-
 
 <p-confirmDialog header="Confirmation" acceptLabel="JA" rejectLabel="NEIN" icon="pi pi-exclamation-triangle">
 </p-confirmDialog>

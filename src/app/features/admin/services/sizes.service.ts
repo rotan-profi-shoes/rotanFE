@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SizesService {
 
   constructor(
     private readonly http: HttpClient,
-  ) { } 
+  ) { }
 
   public addSizes(sizes: []): Observable<any> {
     return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/sizes/add`, sizes);

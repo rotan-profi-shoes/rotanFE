@@ -10,7 +10,7 @@ export class ShoesService {
 
   constructor(
     private readonly http: HttpClient,
-  ) { } 
+  ) { }
 
   public editShoes(id: string, shoes: any): Observable<any> {
     return this.http.put<any>(`${environment.rotanApiHost}/api/shoes/update-one/${id}`, shoes);
@@ -30,6 +30,10 @@ export class ShoesService {
 
   public addShoes(shoes: any): Observable<any> {
     return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/shoes/add`, shoes);
+  }
+
+  public copyShoes(id: string, newSku: any): Observable<any> {
+    return this.http.post<Observable<any>>(`${environment.rotanApiHost}/api/shoes/copy/${id}`, newSku);
   }
 
   public getGenderTypesList(): Observable<any> {
@@ -82,5 +86,9 @@ export class ShoesService {
 
   public getSoleDescriptionTypesList(): Observable<any> {
     return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/sole-description-types`);
+  }
+
+  public getGroupedShoesByParentSku(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/grouped`);
   }
 }

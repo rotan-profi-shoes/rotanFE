@@ -1,0 +1,33 @@
+<form [formGroup]="skuForm">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col form-field">
+          <span class="label">Parent SKU</span>
+
+          <input formControlName="parentSku" type="text" pInputText class="p-inputtext-sm" placeholder="Eingang ...">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row button-section">
+  <div class="col-6">
+    <div class="row">
+      <div class="col form-field">
+        <button pButton type="submit" label="ABBRECHEN" class="p-button-sm p-button-secondary"
+                (click)="close()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="row">
+      <div class="col form-field">
+        <button pButton type="submit" [label]="'ADD NEW PARENT SKU'"
+                class="p-button-sm p-button-warning" (click)="addSku()"></button>
+      </div>
+    </div>
+  </div>
+</div>

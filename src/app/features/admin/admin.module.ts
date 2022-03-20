@@ -24,6 +24,10 @@ import { ShoesInfoComponent } from './components/shoes-info/shoes-info.component
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SizeFormComponent } from './components/size-form/size-form.component';
+import { SkuManagerComponent } from './components/sku-manager/sku-manager.component';
+import { SkuFormComponent } from './components/sku-form/sku-form.component';
+import { SkuService } from './services/sku.service';
+import { ShoesCopyFormComponent } from './components/shoes-copy-form/shoes-copy-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,9 @@ import { SizeFormComponent } from './components/size-form/size-form.component';
     SizeManagerComponent,
     ShoesInfoComponent,
     SizeFormComponent,
+    SkuManagerComponent,
+    SkuFormComponent,
+    ShoesCopyFormComponent,
   ],
   imports: [
     CommonModule,
@@ -55,10 +62,11 @@ import { SizeFormComponent } from './components/size-form/size-form.component';
   providers: [
     ShoesService,
     SizesService,
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AuthInterceptor, 
-      multi: true 
+    SkuService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
   ],
 })
