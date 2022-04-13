@@ -82,7 +82,7 @@
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td  {
     vertical-align: middle;
     // border-bottom: none;
-} 
+}
 
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child  {
     text-align: right;
@@ -90,4 +90,36 @@
 
 .btn-margin {
     margin: 0 20px;
+}
+
+::ng-deep .p-fileupload .p-fileupload-buttonbar {
+    background: transparent;
+    border: none;
+    padding: 1rem 0 1rem;
+}
+
+::ng-deep .p-button {
+    color: #212529;
+    background: #FBC02D;
+    border: 1px solid #FBC02D;
+}
+
+::ng-deep .p-fileupload .p-fileupload-content {
+    border-radius: 10px;
+}
+
+::ng-deep .p-fileupload-choose:not(.p-disabled):active {
+    color: #212529;
+    background: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+::ng-deep .p-fileupload-choose:not(.p-disabled):hover {
+    color: #212529;
+    background: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+::ng-deep .p-fileupload-content .p-progressbar {
+    display: none;
 }

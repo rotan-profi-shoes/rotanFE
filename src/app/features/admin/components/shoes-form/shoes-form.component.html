@@ -218,7 +218,7 @@
 
     <div class="row space"></div>
 
-    <div class="row section">
+    <!-- <div class="row section">
       <div class="col-6">
         <div class="row">
           <div class="col form-field">
@@ -238,7 +238,15 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+    <div class="row section">
+      <div class="col">
+        <span class="label">Lade ein Foto hoch</span>
+        <p-fileUpload name="myfile[]" url="./upload.php" [multiple]=true [showUploadButton]=false [showCancelButton]=false></p-fileUpload>
+      </div>
     </div>
+
   </form>
 
   <div>

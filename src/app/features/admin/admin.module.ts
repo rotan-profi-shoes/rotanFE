@@ -28,6 +28,7 @@ import { SkuManagerComponent } from './components/sku-manager/sku-manager.compon
 import { SkuFormComponent } from './components/sku-form/sku-form.component';
 import { SkuService } from './services/sku.service';
 import { ShoesCopyFormComponent } from './components/shoes-copy-form/shoes-copy-form.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ShoesCopyFormComponent } from './components/shoes-copy-form/shoes-copy-
     GalleriaModule,
     ConfirmDialogModule,
     DynamicDialogModule,
+    FileUploadModule
   ],
   providers: [
     ShoesService,
