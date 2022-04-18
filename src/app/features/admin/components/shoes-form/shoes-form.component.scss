@@ -1,5 +1,7 @@
+@import '/src/styles/base/vars';
+
 .add-shoes-form {
-    background: #1283ad;
+    background: $primary;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -14,7 +16,7 @@
     padding: 10px;
     margin: 0 20px;
     border-radius: 10px;
-    background-color: #3ba8d1;
+    background-color: $primary-light;
 }
 
 .button-section {
@@ -35,13 +37,13 @@
 }
 
 .custom {
-    background: #1283ad;
+    background: $primary;
     padding: 10px;
     margin-bottom: 20px;
 }
 
 .custom:hover {
-    background: #1283ad;
+    background: $primary;
 }
 
 .title {
@@ -74,52 +76,48 @@
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr {
     background-color: transparent;
-    // font-family: 'Bebas Neue', cursive;
     color: white;
     font-weight: unset;
 }
 
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td  {
     vertical-align: middle;
-    // border-bottom: none;
-}
-
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child  {
-    text-align: right;
 }
 
 .btn-margin {
     margin: 0 20px;
 }
 
-::ng-deep .p-fileupload .p-fileupload-buttonbar {
-    background: transparent;
-    border: none;
-    padding: 1rem 0 1rem;
-}
+::ng-deep {
+    .p-fileupload .p-fileupload-buttonbar {
+        background: transparent;
+        border: none;
+        padding: 1rem 0 1rem;
+    }
 
-::ng-deep .p-button {
-    color: #212529;
-    background: #FBC02D;
-    border: 1px solid #FBC02D;
-}
+    .p-fileupload-choose {
+        color: #212529;
+        background: $orange;
+        border: 1px solid $orange;
+    }
 
-::ng-deep .p-fileupload .p-fileupload-content {
-    border-radius: 10px;
-}
+    .p-fileupload .p-fileupload-content {
+        border-radius: 10px;
+    }
 
-::ng-deep .p-fileupload-choose:not(.p-disabled):active {
-    color: #212529;
-    background: #ffc107;
-    border: 1px solid #ffc107;
-}
+    .p-fileupload-choose:not(.p-disabled):active {
+        color: #212529;
+        background: $orange-dark;
+        border: 1px solid $orange-dark;
+    }
 
-::ng-deep .p-fileupload-choose:not(.p-disabled):hover {
-    color: #212529;
-    background: #ffc107;
-    border: 1px solid #ffc107;
-}
+    .p-fileupload-choose:not(.p-disabled):hover {
+        color: #212529;
+        background: $orange-dark;
+        border: 1px solid $orange-dark;
+    }
 
-::ng-deep .p-fileupload-content .p-progressbar {
-    display: none;
+    .p-fileupload-content .p-progressbar {
+        display: none;
+    }
 }

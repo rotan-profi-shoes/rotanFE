@@ -1,13 +1,15 @@
+@import '/src/styles/base/vars';
+
 .nav-panel {
     width: 100%;
     height: 70px;
-    background: #1283ad;
+    background: $primary;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 150px;
-    
+
     &__logo {
         width: 70px;
         height: 60px;
