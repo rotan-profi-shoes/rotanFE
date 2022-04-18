@@ -29,6 +29,7 @@ import { SkuFormComponent } from './components/sku-form/sku-form.component';
 import { SkuService } from './services/sku.service';
 import { ShoesCopyFormComponent } from './components/shoes-copy-form/shoes-copy-form.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { PhotoService } from './services/photo.service';
 
 @NgModule({
   declarations: [
@@ -59,12 +60,13 @@ import { FileUploadModule } from 'primeng/fileupload';
     GalleriaModule,
     ConfirmDialogModule,
     DynamicDialogModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   providers: [
     ShoesService,
     SizesService,
     SkuService,
+    PhotoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

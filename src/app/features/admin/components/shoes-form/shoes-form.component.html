@@ -15,7 +15,8 @@
           <div class="col-6 form-field">
             <span class="label">PARENT SKU</span>
 
-            <p-dropdown formControlName="parentSku" [options]="parentSku" optionLabel="parentSku" optionValue="parentSku"
+            <p-dropdown formControlName="parentSku" [options]="parentSku" optionLabel="parentSku"
+                        optionValue="parentSku"
                         placeholder="Eingang ..."></p-dropdown>
           </div>
 
@@ -184,8 +185,13 @@
                   <th></th>
                   <th>Preis</th>
                   <th>
-                    <button pButton pRipple type="button" icon="fas fa-plus" label="Größe hinzufügen"
-                            class="p-button p-button-warning" (click)="openSizeDialog()">
+                    <button pButton
+                            pRipple
+                            type="button"
+                            icon="fas fa-plus"
+                            label="Größe hinzufügen"
+                            class="p-button p-button-warning"
+                            (click)="openSizeDialog()">
                     </button>
                   </th>
                 </tr>
@@ -199,11 +205,19 @@
                   <td></td>
                   <td>{{ size.price | currency:'EUR' }}</td>
                   <td>
-                    <button pButton pRipple type="button" icon="fas fa-edit" class="btn-margin p-button p-button-help"
+                    <button pButton
+                            pRipple
+                            type="button"
+                            icon="fas fa-edit"
+                            class="btn-margin p-button p-button-help"
                             (click)="openSizeDialog(size)">
                     </button>
 
-                    <button pButton pRipple type="button" icon="fas fa-trash" class="p-button p-button-danger"
+                    <button pButton
+                            pRipple
+                            type="button"
+                            icon="fas fa-trash"
+                            class="p-button p-button-danger"
                             (click)="deleteDialog(size)">
                     </button>
                   </td>
@@ -218,35 +232,17 @@
 
     <div class="row space"></div>
 
-    <!-- <div class="row section">
-      <div class="col-6">
-        <div class="row">
-          <div class="col form-field">
-            <span class="label">Öffentliche primäre Bild-URL</span>
-
-            <input formControlName="img1" type="text" pInputText class="p-inputtext-sm" placeholder="Eingang ...">
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <div class="row">
-          <div class="col form-field">
-            <span class="label">Öffentliche sekundäre Bild-URL</span>
-
-            <input formControlName="img2" type="text" pInputText class="p-inputtext-sm" placeholder="Eingang ...">
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <div class="row section">
       <div class="col">
-        <span class="label">Lade ein Foto hoch</span>
-        <p-fileUpload name="myfile[]" url="./upload.php" [multiple]=true [showUploadButton]=false [showCancelButton]=false></p-fileUpload>
+        <span class="label">photos</span>
+        <p-fileUpload accept="image/*"
+                      [multiple]="false"
+                      [showUploadButton]="false"
+                      [showCancelButton]="false"
+                      (onSelect)="onSelectPhotos($event)">
+        </p-fileUpload>
       </div>
     </div>
-
   </form>
 
   <div>
