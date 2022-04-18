@@ -1,3 +1,5 @@
+@import '/src/styles/base/vars';
+
 :host {
   .back-panel {
     display: flex;
@@ -13,7 +15,7 @@
     padding: 10px;
     margin: 0 20px;
     border-radius: 10px;
-    background-color: #3ba8d1;
+    background-color: $primary-light;
   }
 
   .button-section {
@@ -34,21 +36,20 @@
   }
 
   .custom {
-    background: #1283ad;
+    background: $primary;
     padding: 10px;
-    //margin-bottom: 20px;
   }
 
   .p-button-primary,
   .p-button-primary:hover,
   .custom:hover {
-    background: #1283ad;
+    background: $primary;
   }
 
   .title {
     margin: 10px;
     text-align: center;
-    color: #1283ad;
+    color: $primary;
     font-size: 28px;
     font-family: 'Bebas Neue', cursive;
   }

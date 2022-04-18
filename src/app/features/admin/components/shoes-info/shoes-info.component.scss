@@ -1,5 +1,7 @@
+@import '/src/styles/base/vars';
+
 .shoes-info {
-    background: #1283ad;
+    background: $primary;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -19,7 +21,7 @@
     margin: 0 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: #3ba8d1;
+    background-color: $primary-light;
 }
 
 .space {
@@ -58,18 +60,18 @@
 }
 
 .custom {
-    background: #1283ad;
+    background: $primary;
     padding: 10px;
     margin-bottom: 20px;
 }
 
 .custom:hover {
-    background: #1283ad;
+    background: $primary;
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td  {
     border: none;
-}  
+}
 
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
     background-color: transparent;

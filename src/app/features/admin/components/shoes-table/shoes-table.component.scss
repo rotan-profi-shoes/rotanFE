@@ -8,3 +8,7 @@
     justify-content: space-around;
     align-items: center;
 }
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child {
+    text-align: left;
+}
