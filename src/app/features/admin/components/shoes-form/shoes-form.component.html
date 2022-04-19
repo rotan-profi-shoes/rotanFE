@@ -233,9 +233,26 @@
     <div class="row space"></div>
 
     <div class="row section">
+
+
       <div class="col">
         <span class="label">photos</span>
-        <p-fileUpload accept="image/*"
+        <div *ngIf="isEditMode && tempCurrentShoes" class="row">
+          <div *ngFor="let photo of tempCurrentShoes" class="col-1">
+            <div class="content">
+              <p-image [src]="photo"
+                   alt="Image"
+                   height="80"
+                   width="100"
+                   [preview]="true"
+              >
+              </p-image>
+              <a class="content-photo__remove" (click)="deletePhotoDialog(photo)">×</a>
+            </div>
+          </div>
+          <input type="file" id="myFile" (change)="uploadSinglePhoto($event)">
+        </div>
+        <p-fileUpload *ngIf="!isEditMode" accept="image/*"
                       [multiple]="false"
                       [showUploadButton]="false"
                       [showCancelButton]="false"

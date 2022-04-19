@@ -45,6 +45,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   public currentShoes: any;
   public file: any;
 
+  public tempCurrentShoes: string[] = [];
+
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -86,6 +88,9 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           }),
         ).subscribe(([shoes, sizes]) => {
           this.currentShoes = shoes;
+          this.tempCurrentShoes = shoes.photos;
+
+          console.log(this.currentShoes)
 
           const shoesForPatch = {
             ...shoes,
@@ -191,7 +196,6 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       this.photosService.uploadFileToS3(response.url, this.file).subscribe(() => {
         const photos = this.shoesForm.controls.photos as FormGroup;
         photos.setValue([response.url.split('?')[0]]);
-        // photos.push()
       });
     });
   }
@@ -228,6 +232,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           this.messageService.add({ severity: 'error', summary: 'Fehler', detail: mainError.error });
         });
     } else {
+      this.shoesForm.controls.photos.setValue(this.tempCurrentShoes)
       this.shoesService.editShoes(this.currentShoes._id, this.shoesForm.value).subscribe((updatedShoes: any) => {
         this.messageService.add({
           severity: 'success',
@@ -235,9 +240,11 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           detail: 'Schuhe wurde mit Erfolg aktualisiert.',
         });
 
+        console.log(updatedShoes)
+
         const shoesForPatch = {
           ...updatedShoes,
-          parentSku: updatedShoes.parentSku.parentSku,
+          parentSku: updatedShoes.parentSku?.parentSku,
           gender: updatedShoes.gender?.id,
           color: updatedShoes.color?.id,
           form: updatedShoes.form?.id,
@@ -250,6 +257,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           description: updatedShoes.description?.id,
           capDescription: updatedShoes.capDescription?.id,
           soleDescription: updatedShoes.soleDescription?.id,
+          photos: [],
         };
 
         this.shoesForm.patchValue(shoesForPatch);
@@ -258,6 +266,37 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
         (mainError) => {
           this.messageService.add({ severity: 'error', summary: 'Fehler', detail: mainError.error });
         };
+    }
+  }
+
+  public deletePhotoDialog(photoUrl: any): void {
+    this.confirmationService.confirm({
+        message: `Do you want to delete this photo?`,
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          console.log('photoUrl', photoUrl)
+          console.log(this.tempCurrentShoes)
+          this.tempCurrentShoes = this.tempCurrentShoes.filter(itemUrl => itemUrl !== photoUrl)
+          console.log(this.tempCurrentShoes)
+        },
+        reject: () => {;
+            // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+        }
+    });
+  }
+
+  public uploadSinglePhoto(event: any): void {
+    console.log('test multiple select:', event)
+    if (event.target.files[0]) {
+      this.photosService.getUrl().subscribe(response => {
+        this.photosService.uploadFileToS3(response.url, event.target.files[0]).subscribe(() => {
+          //const photos = this.shoesForm.controls.photos as FormGroup;
+          //photos.setValue([response.url.split('?')[0]]);
+          this.tempCurrentShoes.push(response.url.split('?')[0]);
+          console.log(this.tempCurrentShoes)
+        });
+      });
     }
   }
 
