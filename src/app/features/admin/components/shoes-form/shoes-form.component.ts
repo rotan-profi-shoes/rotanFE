@@ -272,10 +272,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          console.log('photoUrl', photoUrl)
-          console.log(this.tempCurrentShoes)
           this.tempCurrentShoes = this.tempCurrentShoes.filter(itemUrl => itemUrl !== photoUrl)
-          console.log(this.tempCurrentShoes)
         },
         reject: () => {;
             // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
@@ -284,14 +281,10 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   }
 
   public uploadSinglePhoto(event: any): void {
-    console.log('test multiple select:', event)
     if (event.target.files[0]) {
       this.photosService.getUrl().subscribe(response => {
         this.photosService.uploadFileToS3(response.url, event.target.files[0]).subscribe(() => {
-          //const photos = this.shoesForm.controls.photos as FormGroup;
-          //photos.setValue([response.url.split('?')[0]]);
           this.tempCurrentShoes.push(response.url.split('?')[0]);
-          console.log(this.tempCurrentShoes)
         });
       });
     }

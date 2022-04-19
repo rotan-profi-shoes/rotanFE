@@ -236,10 +236,20 @@
 
 
       <div class="col">
-        <span class="label">photos</span>
+
         <div *ngIf="isEditMode && tempCurrentShoes" class="row">
-          <div *ngFor="let photo of tempCurrentShoes" class="col-1">
-            <div class="content">
+          <div class="content-header">
+            <span class="label label-add__photo">photos</span>
+            <div>
+              <input type="file" id="file" (change)="uploadSinglePhoto($event)" accept="image/*">
+              <label for="file" class="content-add__photo">
+                <img src="../../../../../assets/images/add_photo.png" alt="add"> &nbsp;
+                Add a photo
+              </label>
+            </div>
+          </div>
+          <div *ngFor="let photo of tempCurrentShoes" class="col-2">
+            <div class="content col">
               <p-image [src]="photo"
                    alt="Image"
                    height="80"
@@ -250,8 +260,8 @@
               <a class="content-photo__remove" (click)="deletePhotoDialog(photo)">×</a>
             </div>
           </div>
-          <input type="file" id="myFile" (change)="uploadSinglePhoto($event)">
         </div>
+        <span class="label">photos</span>
         <p-fileUpload *ngIf="!isEditMode" accept="image/*"
                       [multiple]="false"
                       [showUploadButton]="false"
