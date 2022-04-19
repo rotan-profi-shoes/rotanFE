@@ -90,8 +90,6 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           this.currentShoes = shoes;
           this.tempCurrentShoes = shoes.photos;
 
-          console.log(this.currentShoes)
-
           const shoesForPatch = {
             ...shoes,
             parentSku: shoes?.parentSku?.parentSku,
@@ -232,32 +230,31 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           this.messageService.add({ severity: 'error', summary: 'Fehler', detail: mainError.error });
         });
     } else {
-      this.shoesForm.controls.photos.setValue(this.tempCurrentShoes)
-      this.shoesService.editShoes(this.currentShoes._id, this.shoesForm.value).subscribe((updatedShoes: any) => {
+      this.shoesService.editShoes(this.currentShoes._id, {
+        ...this.shoesForm.value,
+        photos: this.tempCurrentShoes,
+      }).subscribe((response: any) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Erfolg',
           detail: 'Schuhe wurde mit Erfolg aktualisiert.',
         });
 
-        console.log(updatedShoes)
-
         const shoesForPatch = {
-          ...updatedShoes,
-          parentSku: updatedShoes.parentSku?.parentSku,
-          gender: updatedShoes.gender?.id,
-          color: updatedShoes.color?.id,
-          form: updatedShoes.form?.id,
-          shoesClass: updatedShoes.shoesClass?.id,
-          zertifikat: updatedShoes.zertifikat?.id,
-          sole: updatedShoes.sole?.id,
-          material: updatedShoes.material?.id,
-          modification: updatedShoes.modification?.id,
-          upperLeather: updatedShoes.upperLeather?.id,
-          description: updatedShoes.description?.id,
-          capDescription: updatedShoes.capDescription?.id,
-          soleDescription: updatedShoes.soleDescription?.id,
-          photos: [],
+          ...response.updatedShoes,
+          parentSku: response.updatedShoes.parentSku?.parentSku,
+          gender: response.updatedShoes.gender?.id,
+          color: response.updatedShoes.color?.id,
+          form: response.updatedShoes.form?.id,
+          shoesClass: response.updatedShoes.shoesClass?.id,
+          zertifikat: response.updatedShoes.zertifikat?.id,
+          sole: response.updatedShoes.sole?.id,
+          material: response.updatedShoes.material?.id,
+          modification: response.updatedShoes.modification?.id,
+          upperLeather: response.updatedShoes.upperLeather?.id,
+          description: response.updatedShoes.description?.id,
+          capDescription: response.updatedShoes.capDescription?.id,
+          soleDescription: response.updatedShoes.soleDescription?.id,
         };
 
         this.shoesForm.patchValue(shoesForPatch);
