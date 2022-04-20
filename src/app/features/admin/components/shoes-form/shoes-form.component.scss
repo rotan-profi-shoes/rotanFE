@@ -126,10 +126,11 @@
         display: none;
     }
 
-    .p-datatable-responsive-scroll>.p-datatable-wrapper {
-        overflow-y: auto;
-        max-height: 475px;
-    }
+}
+
+:host ::ng-deep  .p-datatable-responsive-scroll>.p-datatable-wrapper {
+    overflow-y: auto;
+    max-height: 475px;
 }
 
 .content-header {
