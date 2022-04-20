@@ -70,6 +70,10 @@
     vertical-align: middle;
 }
 
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th:last-child {
+    text-align: right;
+}
+
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child {
     text-align: right;
 }
@@ -121,6 +125,11 @@
     .p-fileupload-content .p-progressbar {
         display: none;
     }
+
+    .p-datatable-responsive-scroll>.p-datatable-wrapper {
+        overflow-y: auto;
+        max-height: 475px;
+    }
 }
 
 .content-header {
@@ -155,7 +164,7 @@
     overflow: hidden;
     position: relative;
     padding: 0.3rem 0.5rem;
-    font-family: inherit;
+    font-family: "Segoe UI Symbol";
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;

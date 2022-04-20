@@ -41,7 +41,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   public isEditMode: boolean = false;
   public sizesTable: any;
   public shoesId: string;
-  public submitButtonLabel: string = 'SCHUHE HINZUFÜGEN';
+  public submitButtonLabel: string = 'ADD SHOES';
   public currentShoes: any;
   public file: any;
 
@@ -63,7 +63,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   ) {
     if (this.router.url.includes('edit')) {
       this.isEditMode = true;
-      this.submitButtonLabel = 'SCHUHE BEARBEITEN';
+      this.submitButtonLabel = 'EDITING SHOES';
     }
   }
 
@@ -155,7 +155,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public openSizeDialog(size?: any): void {
     const ref = this.dialogService.open(SizeFormComponent, {
-      header: !size ? 'Neue Größe hinzufügen' : `Größe bearbeiten ${size.sizeValue}`,
+      header: !size ? 'Add new size' : `Size edit ${size.sizeValue}`,
       width: '70%',
       data: {
         size: size || null,
@@ -172,8 +172,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public deleteDialog(size: any): void {
     this.confirmationService.confirm({
-      message: `Sind Sie sicher, dass Sie die Größe entfernen möchten ${size.sizeValue}?`,
-      header: 'Bestätigung',
+      message: `Are you sure you want to remove the size ${size.sizeValue}?`,
+      header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.sizesService.deleteSizesById(size._id).subscribe(() => {
@@ -226,11 +226,11 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           return this.sizesService.addSizes(prepareSizes);
         }),
       ).subscribe((sizesResponse) => {
-          this.messageService.add({ severity: 'success', summary: 'Erfolg', detail: 'Schuhe mit Erfolg hinzugefügt.' });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Shoes added with success.' });
           this.router.navigate(['admin']);
         },
         (mainError) => {
-          this.messageService.add({ severity: 'error', summary: 'Fehler', detail: mainError.error });
+          this.messageService.add({ severity: 'error', summary: 'Fault', detail: mainError.error });
         });
     } else {
       this.shoesService.editShoes(this.currentShoes._id, {
@@ -239,8 +239,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       }).subscribe((response: any) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Erfolg',
-          detail: 'Schuhe wurde mit Erfolg aktualisiert.',
+          summary: 'Success',
+          detail: 'Shoes has been updated with success.',
         });
 
         const shoesForPatch = {
@@ -264,7 +264,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
       }),
         (mainError) => {
-          this.messageService.add({ severity: 'error', summary: 'Fehler', detail: mainError.error });
+          this.messageService.add({ severity: 'error', summary: 'Fault', detail: mainError.error });
         };
     }
   }

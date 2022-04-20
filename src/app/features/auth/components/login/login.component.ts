@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public loginForm: FormGroup; 
+  public loginForm: FormGroup;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new SetUser(resp.user));
       this.store.dispatch(new SetToken(resp.userToken));
 
-      this.messageService.add({severity:'success', summary:'Erfolg', detail:'Ihre Zugangsdaten sind gültig.'});
+      this.messageService.add({severity:'success', summary:'Success', detail:'Your access data is valid.'});
       this.router.navigate(['admin']);
     },
     (mainError) => {

@@ -3,10 +3,10 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Größe</span>
+          <span class="label">Size</span>
 
           <p-dropdown formControlName="sizeValue" [disabled]="isEditMode" appendTo="body" [options]="sizes"
-            placeholder="Wählen ...">
+            placeholder="Choose ...">
           </p-dropdown>
         </div>
       </div>
@@ -15,9 +15,9 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Menge</span>
+          <span class="label">Quantity</span>
 
-          <p-inputNumber formControlName="quantity" [showButtons]="true" [min]="0" placeholder="Eingang ..."
+          <p-inputNumber formControlName="quantity" [showButtons]="true" [min]="0" placeholder="Input ..."
             [max]="100">
           </p-inputNumber>
         </div>
@@ -27,9 +27,9 @@
     <div class="col-4">
       <div class="row">
         <div class="col form-field">
-          <span class="label">Preis</span>
+          <span class="label">Price</span>
 
-          <p-inputNumber formControlName="price" [showButtons]="true" mode="currency" placeholder="Eingang ..."
+          <p-inputNumber formControlName="price" [showButtons]="true" mode="currency" placeholder="Input ..."
             currency="EUR">
           </p-inputNumber>
         </div>
@@ -42,7 +42,7 @@
   <div class="col-6">
     <div class="row">
       <div class="col form-field">
-        <button pButton type="submit" label="ABBRECHEN" class="p-button-sm p-button-secondary"
+        <button pButton type="submit" label="CANCEL" class="p-button-sm p-button-secondary"
           (click)="close()"></button>
       </div>
     </div>
@@ -51,7 +51,7 @@
   <div class="col-6">
     <div class="row">
       <div class="col form-field">
-        <button pButton type="submit" [label]="!isEditMode ? 'GRÖSSE HINZUFÜGEN' : 'GRÖSSE AKTUALISIEREN'"
+        <button pButton type="submit" [label]="!isEditMode ? 'ADD SIZE' : 'SIZE UPDATE'"
           class="p-button-sm p-button-warning" (click)="addSize()"></button>
       </div>
     </div>

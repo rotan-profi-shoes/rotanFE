@@ -59,8 +59,8 @@ export class ShoesTableComponent implements OnInit {
 
   public deleteDialog(shoe: any): void {
     this.confirmationService.confirm({
-        message: `Sind Sie sicher, dass Sie entfernen möchten ${shoe.sku}?`,
-        header: 'Bestätigung',
+        message: `Are you sure you want to remove ${shoe.sku}?`,
+        header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.shoesService.deleteShoesById(shoe._id).pipe(

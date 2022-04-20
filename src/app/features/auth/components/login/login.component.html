@@ -10,10 +10,10 @@
       <input formControlName="email" type="text" pInputText class="p-inputtext-sm" placeholder="Email">
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
         <div *ngIf="email.errors.required">
-          E-Mail ist erforderlich.
+          E-Mail is required.
         </div>
         <div *ngIf="email.errors.email">
-          Ist keine gültige E-Mail.
+          E-Mail is not valid.
         </div>
       </div>
     </div>
@@ -22,12 +22,12 @@
       <input formControlName="password" type="password" pInputText class="p-inputtext-sm" placeholder="Password">
       <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
         <div *ngIf="password.errors.required">
-          Passwort wird benötigt.
+          Passwort is required.
         </div>
       </div>
     </div>
 
-    <button pButton type="submit" label="ANMELDEN" class="p-button-sm p-button-secondary" (click)="tryLogin()"></button>
+    <button pButton type="submit" label="CANCEL" class="p-button-sm p-button-secondary" (click)="tryLogin()"></button>
   </form>
 </div>
 
