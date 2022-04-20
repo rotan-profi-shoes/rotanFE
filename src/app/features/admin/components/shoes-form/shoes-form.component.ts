@@ -88,6 +88,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           }),
         ).subscribe(([shoes, sizes]) => {
           this.currentShoes = shoes;
+
           this.tempCurrentShoes = shoes.photos;
 
           const shoesForPatch = {
@@ -188,18 +189,20 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onSelectPhotos(event: any) {
-    this.file = event.currentFiles[0];
-    this.photosService.getUrl().subscribe(response => {
-      this.photosService.uploadFileToS3(response.url, this.file).subscribe(() => {
-        const photos = this.shoesForm.controls.photos as FormGroup;
-        photos.setValue([response.url.split('?')[0]]);
+  public uploadSinglePhoto(event: any): void {
+    if (event.target.files[0]) {
+      this.photosService.getUrl().subscribe(response => {
+        this.photosService.uploadFileToS3(response.url, event.target.files[0]).subscribe(() => {
+          this.tempCurrentShoes.push(response.url.split('?')[0]);
+          this.shoesForm.controls.photos.setValue(this.tempCurrentShoes)
+        });
       });
-    });
+    }
   }
 
   public submit(): void {
     if (!this.shoesForm.valid) {
+      console.log(this.shoesForm)
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required.' });
 
       return;
@@ -273,21 +276,12 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.tempCurrentShoes = this.tempCurrentShoes.filter(itemUrl => itemUrl !== photoUrl)
+          this.shoesForm.controls.photos.setValue(this.tempCurrentShoes)
         },
         reject: () => {;
             // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
         }
     });
-  }
-
-  public uploadSinglePhoto(event: any): void {
-    if (event.target.files[0]) {
-      this.photosService.getUrl().subscribe(response => {
-        this.photosService.uploadFileToS3(response.url, event.target.files[0]).subscribe(() => {
-          this.tempCurrentShoes.push(response.url.split('?')[0]);
-        });
-      });
-    }
   }
 
   private initForm(): void {

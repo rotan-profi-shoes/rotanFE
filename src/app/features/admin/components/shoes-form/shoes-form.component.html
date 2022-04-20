@@ -233,11 +233,8 @@
     <div class="row space"></div>
 
     <div class="row section">
-
-
       <div class="col">
-
-        <div *ngIf="isEditMode && tempCurrentShoes" class="row">
+        <div *ngIf="tempCurrentShoes" class="row">
           <div class="content-header">
             <span class="label label-add__photo">photos</span>
             <div>
@@ -261,13 +258,6 @@
             </div>
           </div>
         </div>
-        <span class="label">photos</span>
-        <p-fileUpload *ngIf="!isEditMode" accept="image/*"
-                      [multiple]="false"
-                      [showUploadButton]="false"
-                      [showCancelButton]="false"
-                      (onSelect)="onSelectPhotos($event)">
-        </p-fileUpload>
       </div>
     </div>
   </form>
