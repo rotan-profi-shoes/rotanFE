@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  rotanApiHost: 'https://protected-tundra-44997.herokuapp.com',
 };
