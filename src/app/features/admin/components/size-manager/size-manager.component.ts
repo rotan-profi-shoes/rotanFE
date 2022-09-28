@@ -21,7 +21,7 @@ export class SizeManagerComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiService: ShoesService,
   ) {
-   }
+  }
 
   public get sizesRows(): FormArray {
     if (this.sizesManagementForm) {

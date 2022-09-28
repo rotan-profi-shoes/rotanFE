@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Subscription } from 'rxjs';
 import { ShoesService } from '../../services/shoes.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -33,6 +33,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   public modifications: Item[];
   public materials: Item[];
   public soles: Item[];
+  public shoesTypes: Item[];
   public upperLeathers: Item[];
   public descriptions: Item[];
   public capDescriptions: Item[];
@@ -63,7 +64,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
   ) {
     if (this.router.url.includes('edit')) {
       this.isEditMode = true;
-      this.submitButtonLabel = 'EDITING SHOES';
+      this.submitButtonLabel = 'EDIT SHOES';
     }
   }
 
@@ -100,6 +101,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
             shoesClass: shoes.shoesClass.id,
             zertifikat: shoes.zertifikat.id,
             sole: shoes.sole.id,
+            shoesTypes: shoes.shoesTypes,
             material: shoes.material.id,
             modification: shoes.modification.id,
             upperLeather: shoes.upperLeather.id,
@@ -135,7 +137,8 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       this.shoesService.getCapDescriptionTypesList(),
       this.shoesService.getSoleDescriptionTypesList(),
       this.skuService.getSkuList(),
-    ]).subscribe(([colors, forms, genders, sizes, shoesClass, zertifikats, soles, materials, modifications, upperLeathers, descriptions, capDescriptions, soleDescriptions, skuList]) => {
+      this.shoesService.getShoesTypes(),
+    ]).subscribe(([ colors, forms, genders, sizes, shoesClass, zertifikats, soles, materials, modifications, upperLeathers, descriptions, capDescriptions, soleDescriptions, skuList, shoesTypes ]) => {
       this.colors = colors;
       this.forms = forms;
       this.genders = genders;
@@ -150,6 +153,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       this.capDescriptions = capDescriptions;
       this.soleDescriptions = soleDescriptions;
       this.parentSku = skuList;
+      this.shoesTypes = shoesTypes;
     });
   }
 
@@ -183,7 +187,6 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
         });
       },
       reject: () => {
-        ;
         // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
       },
     });
@@ -202,7 +205,6 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
 
   public submit(): void {
     if (!this.shoesForm.valid) {
-      console.log(this.shoesForm)
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required.' });
 
       return;
@@ -215,7 +217,9 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
     }
 
     if (!this.isEditMode) {
-      this.shoesService.addShoes(this.shoesForm.value).pipe(
+      this.shoesService.addShoes({
+        ...this.shoesForm.value,
+      }).pipe(
         switchMap((resp) => {
           const prepareSizes = this.shoesForm.controls.shoesSizes.get('sizes').value;
 
@@ -249,6 +253,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
           gender: response.updatedShoes.gender?.id,
           color: response.updatedShoes.color?.id,
           form: response.updatedShoes.form?.id,
+          // shoesTypes: response.updatedShoes.shoesTypes,
           shoesClass: response.updatedShoes.shoesClass?.id,
           zertifikat: response.updatedShoes.zertifikat?.id,
           sole: response.updatedShoes.sole?.id,
@@ -301,6 +306,7 @@ export class ShoesFormComponent implements OnInit, OnDestroy {
       description: [null, Validators.required],
       capDescription: [null, Validators.required],
       soleDescription: [null, Validators.required],
+      shoesType: [[], Validators.required],
       photos: [[], Validators.required],
       shoesSizes: this.formBuilder.group({
         sizes: this.formBuilder.array([]),

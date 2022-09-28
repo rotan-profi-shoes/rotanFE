@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  rotanApiHost: 'https://protected-tundra-44997.herokuapp.com',
+  rotanApiHost: 'http://localhost:3000',
+  // rotanApiHost: 'https://protected-tundra-44997.herokuapp.com',
 };
 
 /*

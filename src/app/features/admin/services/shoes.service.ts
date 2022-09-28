@@ -91,4 +91,8 @@ export class ShoesService {
   public getGroupedShoesByParentSku(): Observable<any> {
     return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/grouped`);
   }
+
+  public getShoesTypes(): Observable<any> {
+    return this.http.get<Observable<any>>(`${environment.rotanApiHost}/api/shoes/shoes-types`);
+  }
 }
