@@ -3,8 +3,9 @@
           class="p-button custom">
   </button>
 
-  <span class="title">All parent sku: </span>
+  <span class="title">All parent SKU's</span>
 </div>
+
 <p-table [value]="isSearchEmpty ? skus : skuTableData" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="table-header">
@@ -23,12 +24,14 @@
       </div>
     </div>
   </ng-template>
+
   <ng-template pTemplate="header">
     <tr>
       <th>Parent SKU</th>
       <th></th>
     </tr>
   </ng-template>
+
   <ng-template pTemplate="body" let-sku>
     <tr>
       <td>{{ sku.parentSku }}</td>
@@ -39,6 +42,7 @@
       </td>
     </tr>
   </ng-template>
+
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
       In total there are {{ skus ? skus.length : 0 }} "PARENT SKU" in the system.

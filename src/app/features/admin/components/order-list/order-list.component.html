@@ -1,0 +1,80 @@
+<p-table [value]="orders$ | async" dataKey="_id">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th>Order Id</th>
+      <th>Customer</th>
+      <th>Address</th>
+      <th>Contact</th>
+      <th>Delivery/Payment</th>
+<!--      <th>Cost</th>-->
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body"
+               let-order
+               let-expanded="expanded">
+    <tr>
+      <td>
+        <button type="button"
+                pButton pRipple
+                [pRowToggler]="order"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+        </button>
+      </td>
+
+      <td>{{ order._id }}</td>
+      <td>{{ order.lastName }} {{ order.firstName }}</td>
+      <td>{{ order.addressLine }} , {{ order.city }} | {{ order.postalCode }} {{ order.country }}</td>
+      <td>{{ order.email }} | {{ order.phoneNumber }}</td>
+      <td>{{ order.deliveryMethod }} | {{ order.paymentMethod }}</td>
+<!--      <td>{{ order.totalPriceForProducts | currency:'EUR' }}</td>-->
+
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-order>
+    <tr>
+      <td colspan="7">
+        <div class="p-p-3">
+          <p-table [value]="order.products" dataKey="sku">
+            <ng-template pTemplate="header">
+    <tr>
+      <th>SKU</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Price per one</th>
+      <th>Quantity</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>{{ product.product.sku }}</td>
+      <td><img [src]="product.product.photos[0]" width="100" class="p-shadow-4" /></td>
+      <td>{{ product.product.name }}</td>
+      <td>{{ product.size.sizeValue }}</td>
+      <td>{{ product.size.price | currency:'EUR' }}</td>
+      <td>{{ product.quantity }}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      Total for products {{ orders$ | async }}
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="6">There are no orders.</td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+</p-table>

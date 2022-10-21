@@ -5,6 +5,7 @@ import { ShoesInfoComponent } from './components/shoes-info/shoes-info.component
 import { ShoesTableComponent } from './components/shoes-table/shoes-table.component';
 import { AdminLayoutContainer } from './containers/admin-layout/admin-layout.container';
 import { SkuManagerComponent } from './components/sku-manager/sku-manager.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
         path: 'sku',
         component: SkuManagerComponent,
       },
+      {
+        path: 'orders',
+        component: OrderListComponent,
+      }
     ],
   },
 ];

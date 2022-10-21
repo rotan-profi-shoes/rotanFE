@@ -4,7 +4,6 @@ import { ConfirmationService } from 'primeng/api';
 import { SizesService } from '../../services/sizes.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { SkuFormComponent } from '../sku-form/sku-form.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ShoesCopyFormComponent } from '../shoes-copy-form/shoes-copy-form.component';
 
@@ -17,12 +16,10 @@ import { ShoesCopyFormComponent } from '../shoes-copy-form/shoes-copy-form.compo
 export class ShoesTableComponent implements OnInit {
   public shoes: any;
   public groupedShoes: any;
-  public shoesTableData: any;
   public isSearchEmpty: boolean = true;
   public generalSearch: FormControl;
 
   constructor(
-    // private readonly router: Router,
     public shoesService: ShoesService,
     public sizeService: SizesService,
     private formBuilder: FormBuilder,
@@ -34,13 +31,6 @@ export class ShoesTableComponent implements OnInit {
   public ngOnInit(): void {
     this.buildSearch();
     this.fetchShoes();
-
-    // this.generalSearch.valueChanges.subscribe((value) => {
-    //   value = value.toUpperCase();
-    //   if (value === '') { this.isSearchEmpty = true } else { this.isSearchEmpty = false };
-    //   this.shoesTableData = this.shoes.filter((item) => item.sku.includes(value));
-    //   console.log(this.shoesTableData);
-    // });
   };
 
   public clearSearch(): void {

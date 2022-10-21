@@ -30,6 +30,8 @@ import { SkuService } from './services/sku.service';
 import { ShoesCopyFormComponent } from './components/shoes-copy-form/shoes-copy-form.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PhotoService } from './services/photo.service';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { PhotoService } from './services/photo.service';
     SkuManagerComponent,
     SkuFormComponent,
     ShoesCopyFormComponent,
+    OrderListComponent,
   ],
   imports: [
     CommonModule,
@@ -67,6 +70,7 @@ import { PhotoService } from './services/photo.service';
     SizesService,
     SkuService,
     PhotoService,
+    OrderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
